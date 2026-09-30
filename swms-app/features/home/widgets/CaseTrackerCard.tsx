@@ -1,16 +1,17 @@
 "use client";
 
-import { useState } from "react";
-import { Camera, CircleCheck, ClipboardCheck, UserCheck } from "lucide-react";
-import { cn } from "@/lib/utils";
+// ─────────────────────────────────────────────────────────────
+// Widget · Home › Sample case tracker card
+// Tappable card that steps through a demo case's statuses.
+// Client component: keeps the current step in state.
+// Used by: features/home/sections/Hero.tsx
+// Uses:    content/sample-case
+// Spec:    03-FULL-APP-FLOW F3–F4 (case lifecycle)
+// ─────────────────────────────────────────────────────────────
 
-// Sample case (demo data) following the case lifecycle in 03-FULL-APP-FLOW F3–F4.
-const STEPS = [
-  { status: "Submitted", note: "Photo and location sent", icon: Camera },
-  { status: "Assigned", note: "Worker: Ravi · due today 6 PM", icon: UserCheck },
-  { status: "Awaiting review", note: "Worker added an after photo", icon: ClipboardCheck },
-  { status: "Closed", note: "You confirmed: Resolved", icon: CircleCheck },
-];
+import { useState } from "react";
+import { cn } from "@/lib/utils";
+import { STEPS } from "../content/sample-case";
 
 export function CaseTrackerCard({ className }: { className?: string }) {
   const [step, setStep] = useState(1);

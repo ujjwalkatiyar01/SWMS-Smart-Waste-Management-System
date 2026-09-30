@@ -1,15 +1,19 @@
-import Link from "next/link";
-import { ArrowRight, BookOpen, Camera, ListChecks, Recycle, TreeDeciduous, Truck } from "lucide-react";
-import { CaseTrackerCard } from "./CaseTrackerCard";
-import { HeroScene } from "./HeroScene";
-import { Mascot } from "./Mascot";
+// ─────────────────────────────────────────────────────────────
+// Module · Home › Hero section (first screen)
+// Headline, the two main calls to action, the animated park scene
+// with the mascot, quick links and the sample case card.
+// Used by: features/home/index.ts → app/(public)/page.tsx
+// Uses:    scene/HeroScene, widgets/Mascot, widgets/CaseTrackerCard,
+//          content/hero-points
+// Spec:    01-FRONTEND §3 route "/"
+// ─────────────────────────────────────────────────────────────
 
-const POINTS = [
-  { icon: Camera, label: "Report with a photo", href: "/report/new" },
-  { icon: ListChecks, label: "Track until it's fixed", href: "#how" },
-  { icon: Truck, label: "Request a pickup", href: "/pickup/new" },
-  { icon: Recycle, label: "Learn to segregate", href: "/awareness" },
-];
+import Link from "next/link";
+import { ArrowRight, BookOpen, Camera, TreeDeciduous } from "lucide-react";
+import { POINTS } from "../content/hero-points";
+import { HeroScene } from "../scene/HeroScene";
+import { CaseTrackerCard } from "../widgets/CaseTrackerCard";
+import { Mascot } from "../widgets/Mascot";
 
 export function Hero() {
   return (

@@ -1,3 +1,9 @@
+// ─────────────────────────────────────────────────────────────
+// Shared · DemoLabel
+// Not used on the home page (badge removed there by team decision);
+// kept for the other screens.
+// ─────────────────────────────────────────────────────────────
+
 import { cn } from "@/lib/utils";
 
 /** "Demo data" label shown on every page (03-FULL-APP-FLOW §3). */

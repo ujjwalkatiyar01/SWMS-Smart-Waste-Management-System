@@ -1,18 +1,18 @@
+// ─────────────────────────────────────────────────────────────
+// Module · Home › What you can report (section id="report")
+// Five issue-type cards; each flips from icon to an example photo
+// and links to the report form.
+// Used by: features/home/index.ts → app/(public)/page.tsx
+// Uses:    widgets/FlipMedia, content/issue-types, shared/Reveal
+// Spec:    02-PRD F2 · 03-FULL-APP-FLOW F3.1
+// ─────────────────────────────────────────────────────────────
+
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, CalendarX, Recycle, Route, Trash2, TriangleAlert } from "lucide-react";
-import { Reveal } from "@/components/Reveal";
-import { FlipMedia } from "./FlipMedia";
-
-// Photos: Unsplash License, credits in public/images/issues/CREDITS.md (illustrations, not app data).
-// Issue types from 02-PRD F2 / 03-FULL-APP-FLOW F3.1 ("other" is also available in the form).
-const ISSUES = [
-  { icon: Trash2, title: "Overflowing bin", img: "/images/issues/overflowing-bin.jpg", hint: "Bin full or spilling over", tone: "from-leaf-400 to-leaf-600" },
-  { icon: Route, title: "Garbage on road", img: "/images/issues/garbage-on-road.jpg", hint: "Waste on streets or lanes", tone: "from-leaf-500 to-leaf-700" },
-  { icon: CalendarX, title: "Missed collection", img: "/images/issues/missed-collection.jpg", hint: "Pickup didn't happen", tone: "from-leaf-300 to-leaf-500" },
-  { icon: TriangleAlert, title: "Illegal dumping", img: "/images/issues/illegal-dumping.jpg", hint: "Waste dumped in open places", tone: "from-leaf-500 to-leaf-800" },
-  { icon: Recycle, title: "Improper segregation", img: "/images/issues/improper-segregation.jpg", hint: "Mixed wet and dry waste", tone: "from-leaf-400 to-leaf-700" },
-];
+import { ArrowRight } from "lucide-react";
+import { Reveal } from "@/components/shared/Reveal";
+import { ISSUES } from "../content/issue-types";
+import { FlipMedia } from "../widgets/FlipMedia";
 
 export function IssueTypes() {
   return (

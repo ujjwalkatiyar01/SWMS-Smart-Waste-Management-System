@@ -1,3 +1,8 @@
+// ─────────────────────────────────────────────────────────────
+// Shared · Logo (links to "/" by default)
+// Used by: components/layout/SiteHeader, SiteFooter; any page header
+// ─────────────────────────────────────────────────────────────
+
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";

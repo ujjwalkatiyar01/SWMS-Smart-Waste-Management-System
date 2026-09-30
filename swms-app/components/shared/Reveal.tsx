@@ -1,5 +1,10 @@
 "use client";
 
+// ─────────────────────────────────────────────────────────────
+// Shared · Reveal (scroll-in animation wrapper)
+// Used by: home sections, SiteFooter; reusable on any page
+// ─────────────────────────────────────────────────────────────
+
 import { useEffect, useRef, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 

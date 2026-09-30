@@ -1,43 +1,18 @@
 "use client";
 
-import { useState } from "react";
-import { Camera, History, MessageSquareHeart, ShieldCheck, UserCheck } from "lucide-react";
-import { Reveal } from "@/components/Reveal";
-import { cn } from "@/lib/utils";
+// ─────────────────────────────────────────────────────────────
+// Module · Home › How it works (section id="how")
+// Interactive five-step loop: tap a step to see who does what.
+// Client component: keeps the active step in state.
+// Used by: features/home/index.ts → app/(public)/page.tsx
+// Uses:    content/how-it-works, shared/Reveal
+// Spec:    03-FULL-APP-FLOW F3–F7 (closed loop)
+// ─────────────────────────────────────────────────────────────
 
-// The closed loop from 01-PROJECT-PROPOSAL and 03-FULL-APP-FLOW F3–F7.
-const STEPS = [
-  {
-    icon: Camera,
-    title: "Report",
-    who: "Resident",
-    body: "Take a photo, confirm the location and pick the issue type. The app can suggest a waste category, and you decide.",
-  },
-  {
-    icon: UserCheck,
-    title: "Assign",
-    who: "Admin",
-    body: "The admin assigns a worker. You can see who owns your complaint and when it is due.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Clean with proof",
-    who: "Worker",
-    body: "The worker records the cleanup with an after photo and location, so there is evidence, not only a button click.",
-  },
-  {
-    icon: MessageSquareHeart,
-    title: "You confirm",
-    who: "Resident",
-    body: "Say whether it was resolved, partly resolved or not resolved. Not fixed? The case goes back for action.",
-  },
-  {
-    icon: History,
-    title: "Spot repeat places",
-    who: "Admin",
-    body: "If waste keeps returning to the same place, the admin sees its full history and records a prevention review.",
-  },
-];
+import { useState } from "react";
+import { Reveal } from "@/components/shared/Reveal";
+import { cn } from "@/lib/utils";
+import { STEPS } from "../content/how-it-works";
 
 export function HowItWorks() {
   const [active, setActive] = useState(0);

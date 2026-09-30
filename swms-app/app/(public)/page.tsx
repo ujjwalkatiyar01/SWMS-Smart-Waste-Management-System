@@ -1,9 +1,12 @@
-import { Features } from "@/components/home/Features";
-import { Hero } from "@/components/home/Hero";
-import { HowItWorks } from "@/components/home/HowItWorks";
-import { IssueTypes } from "@/components/home/IssueTypes";
-import { SiteFooter } from "@/components/home/SiteFooter";
-import { SiteHeader } from "@/components/home/SiteHeader";
+// ─────────────────────────────────────────────────────────────
+// Route · "/" — Home page (public, no login)
+// Only assembles the page; each section lives in features/home/.
+// Spec: 01-FRONTEND §3 route "/"
+// ─────────────────────────────────────────────────────────────
+
+import { SiteFooter } from "@/components/layout/SiteFooter";
+import { SiteHeader } from "@/components/layout/SiteHeader";
+import { Features, Hero, HowItWorks, IssueTypes } from "@/features/home";
 
 export default function HomePage() {
   return (

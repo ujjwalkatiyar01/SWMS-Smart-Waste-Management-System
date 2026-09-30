@@ -1,17 +1,19 @@
 "use client";
 
+// ─────────────────────────────────────────────────────────────
+// Widget · Home › Bin mascot
+// Inline-SVG bin character: eyes follow the pointer, a tap shows
+// the next tip, winks, hops and bursts leaves.
+// Client component: pointer tracking, timers and tap state.
+// Used by: features/home/sections/Hero.tsx
+// Uses:    content/mascot-tips
+// ─────────────────────────────────────────────────────────────
+
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+import { TIPS } from "../content/mascot-tips";
 
-// Tips describe what the app does (03-FULL-APP-FLOW F3–F6), not outside facts.
-const TIPS = [
-  "Spotted an overflowing bin? Snap a photo and report it.",
-  "You'll see who is handling your complaint, and by when.",
-  "When it's cleaned, the worker adds an after photo.",
-  "Not really fixed? Say so, and you can reopen it.",
-  "Bulky or hazardous waste? Request a pickup.",
-];
-
+// Leaf-burst directions (dx, dy, rotation) used by the tap animation.
 const LEAVES = [
   { dx: "-90px", dy: "-70px", r: "-120deg" },
   { dx: "-50px", dy: "-120px", r: "80deg" },

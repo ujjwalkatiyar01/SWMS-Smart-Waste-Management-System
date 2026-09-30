@@ -148,6 +148,15 @@ app/
 components/          DemoLabel, NotificationBell, StatusBadge, Timeline, PhotoPicker, LocationPicker,
                      CategoryPicker, HazardNotice, DuplicateNotice, QrScanner, QrSheet, MapView, EmptyState …
 components/home/     🆕 home page sections: SiteHeader, Hero, HeroScene, Mascot, CaseTrackerCard, HowItWorks, IssueTypes, Features, SiteFooter
+                     (moved 2026-09-30 into the feature-based layout below; code unchanged)
+components/layout/   🆕 site chrome shared by pages: SiteHeader, SiteFooter, nav-links
+components/shared/   🆕 small reusable pieces: Logo, Reveal, DemoLabel
+features/<feature>/  🆕 one folder per feature, entry point index.ts; pages import only from it
+  home/sections/     Hero, HowItWorks, IssueTypes, Features
+  home/widgets/      CaseTrackerCard, Mascot, FlipMedia
+  home/scene/        HeroScene + skyline data + parts/ (Tower, Tree, Bench, Lamp, Cloud)
+  home/content/      page text and lists (no UI code)
+  auth/ …            next: login and sign-up follow the same pattern
 components/ui/       shadcn/ui components
 public/brand/logo.png 🆕 logo as supplied
 lib/validation/      zod schemas shared with the backend

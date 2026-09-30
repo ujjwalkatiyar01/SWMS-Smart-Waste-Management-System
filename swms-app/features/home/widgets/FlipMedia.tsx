@@ -1,5 +1,10 @@
 "use client";
 
+// ─────────────────────────────────────────────────────────────
+// Widget · Home › FlipMedia
+// Used by: features/home/sections/IssueTypes.tsx
+// ─────────────────────────────────────────────────────────────
+
 import { useState, type MouseEvent, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 

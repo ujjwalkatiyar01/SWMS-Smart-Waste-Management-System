@@ -32,7 +32,10 @@ app/(admin)/         dashboard, map, setup, trips, flags, audit
 app/(supervisor)/    supervisor queue
 app/(authority)/     higher-authority queue
 app/api/             photo upload, AI category suggestion, CSV export
-components/          shared UI and home-page sections
+components/layout/   site header, footer, navigation links
+components/shared/   small reusable pieces (logo, scroll reveal, demo label)
+components/ui/       shadcn/ui components
+features/home/       home page: sections, widgets, scene, content (entry: index.ts)
 lib/                 Supabase clients, validation, AI adapter
 supabase/            database migrations and tests
 public/images/       illustrations (credits in public/images/issues/CREDITS.md)

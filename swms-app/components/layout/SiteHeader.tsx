@@ -1,17 +1,20 @@
 "use client";
 
+// ─────────────────────────────────────────────────────────────
+// Layout · Site header (public pages)
+// Sticky top bar: logo, main navigation, "Log in", "Report an issue",
+// and the mobile menu. Becomes solid once the page is scrolled.
+// Client component: scroll state, menu open/close, Escape key.
+// Used by: app/(public)/page.tsx
+// Uses:    shared/Logo, nav-links
+// ─────────────────────────────────────────────────────────────
+
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Leaf, LogIn, Menu, X } from "lucide-react";
-import { Logo } from "@/components/Logo";
+import { Logo } from "@/components/shared/Logo";
 import { cn } from "@/lib/utils";
-
-const NAV = [
-  { href: "#how", label: "How it works" },
-  { href: "#report", label: "What to report" },
-  { href: "#features", label: "Features" },
-  { href: "/awareness", label: "Awareness" },
-];
+import { NAV } from "./nav-links";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
