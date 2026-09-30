@@ -133,6 +133,18 @@
 - Times always in the organisation's time zone with the date.
 - Every AI, prediction, estimate and simulated value carries its label (05-AI-SPEC §0).
 
+### 6.1 Design tokens 🆕 (defined in `swms-app/app/globals.css`; use these, never raw hex, px sizes or ad-hoc shadows in screens)
+
+| Group | Tokens | Use |
+|---|---|---|
+| Brand | `leaf-50` … `leaf-950`, `lime-soft`, `sky-soft`, `cream` | Brand surfaces and text (from the logo). Main text `leaf-950`; secondary text `leaf-950/80` or `muted-foreground`; primary button `primary` (= `leaf-700`), hover `leaf-800` |
+| Status | `success` / `success-soft`, `warning` / `warning-soft` / `warning-line`, `danger` / `danger-soft` | Status badges, overdue, "Demo" labels, hazard notice, errors. Always with text, never colour only |
+| Type | Plus Jakarta Sans (interface), Instrument Serif italic (accent word in headings only); sizes from the Tailwind scale plus `text-ui` (15px) and `text-lead` (17px); minimum `text-xs` (12px) | |
+| Text styles | `eyebrow` (small uppercase section label), `section-title` (section heading), `accent-serif` (serif accent inside a heading) | Same heading look on every page |
+| Shadows | `shadow-card`, `shadow-float`, `shadow-cta` | Cards, floating bubbles, primary buttons |
+
+Contrast checked (WCAG AA ≥ 4.5:1 for text): lowest pair on the home page is `leaf-600` on `cream`, 4.99:1. The illustration SVGs (park scene, mascot) keep their own fixed colours; they are artwork, not interface.
+
 ---
 
 ## 7. Where it lives

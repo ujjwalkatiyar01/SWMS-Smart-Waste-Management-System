@@ -29,7 +29,7 @@ export function Hero() {
           </span>
         </h1>
         <p
-          className="mx-auto mt-5 max-w-xl text-[17px] leading-relaxed text-leaf-950/75 sm:text-lg animate-rise"
+          className="mx-auto mt-5 max-w-xl text-lead leading-relaxed text-leaf-950/80 sm:text-lg animate-rise"
           style={{ animationDelay: "240ms" }}
         >
           One place to report waste problems, follow every complaint to a real outcome, and help your area
@@ -41,7 +41,7 @@ export function Hero() {
         >
           <Link
             href="/report/new"
-            className="group inline-flex h-13 w-full max-w-xs items-center justify-center gap-2 rounded-full bg-primary px-7 text-base font-semibold text-primary-foreground shadow-[0_12px_28px_-10px_rgba(46,100,32,0.65)] transition-[transform,background-color] duration-200 hover:bg-leaf-800 active:scale-[0.97] sm:w-auto"
+            className="group inline-flex h-13 w-full max-w-xs items-center justify-center gap-2 rounded-full bg-primary px-7 text-base font-semibold text-primary-foreground shadow-cta transition-[transform,background-color] duration-200 hover:bg-leaf-800 active:scale-[0.97] sm:w-auto"
           >
             <Camera className="size-5" aria-hidden />
             Report an issue
@@ -68,7 +68,7 @@ export function Hero() {
 
         <div className="mx-auto grid max-w-7xl gap-6 px-4 py-10 sm:px-6 lg:pointer-events-none lg:absolute lg:inset-0 lg:grid-cols-2 lg:items-center lg:px-8 lg:py-0">
           <div className="lg:pointer-events-auto lg:max-w-[300px] lg:-translate-y-16 lg:rounded-3xl lg:bg-cream/70 lg:p-5 lg:backdrop-blur-sm">
-            <h2 className="text-[28px] font-extrabold leading-[1.05] tracking-[-0.03em] text-leaf-950 lg:text-[34px]">
+            <h2 className="text-3xl font-extrabold leading-[1.05] tracking-[-0.03em] text-leaf-950 lg:text-4xl">
               Together for cleaner, greener places
             </h2>
             <ul className="mt-5 space-y-1">
@@ -76,7 +76,7 @@ export function Hero() {
                 <li key={label}>
                   <Link
                     href={href}
-                    className="group -mx-2 flex min-h-11 items-center gap-3 rounded-xl px-2 text-[16px] font-medium text-leaf-950/85 transition-colors hover:bg-white/80 active:bg-leaf-100"
+                    className="group -mx-2 flex min-h-11 items-center gap-3 rounded-xl px-2 text-base font-medium text-leaf-950/80 transition-colors hover:bg-white/80 active:bg-leaf-100"
                   >
                     <Icon className="size-5 text-leaf-700 transition-transform duration-200 group-hover:scale-110" aria-hidden />
                     {label}
@@ -90,9 +90,9 @@ export function Hero() {
             <CaseTrackerCard />
             <Link
               href="/awareness"
-              className="group flex w-[200px] rotate-[4deg] flex-col gap-3 rounded-3xl bg-lime-soft p-5 shadow-[0_24px_50px_-24px_rgba(22,52,25,0.45)] transition-transform duration-300 ease-[var(--ease-spring)] hover:-translate-y-1 hover:rotate-[2deg] active:scale-[0.97] lg:mr-[-12px]"
+              className="group flex w-[200px] rotate-[4deg] flex-col gap-3 rounded-3xl bg-lime-soft p-5 shadow-card transition-transform duration-300 ease-[var(--ease-spring)] hover:-translate-y-1 hover:rotate-[2deg] active:scale-[0.97] lg:mr-[-12px]"
             >
-              <span className="text-[17px] font-bold leading-tight text-leaf-950">Greener communities</span>
+              <span className="text-lead font-bold leading-tight text-leaf-950">Greener communities</span>
               <TreeDeciduous
                 className="size-11 text-leaf-900 transition-transform duration-500 ease-[var(--ease-spring)] group-hover:-rotate-6 group-hover:scale-110"
                 strokeWidth={1.5}

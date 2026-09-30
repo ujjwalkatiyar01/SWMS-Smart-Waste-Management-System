@@ -53,7 +53,7 @@ export function SiteHeader() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="rounded-full px-4 py-2.5 text-[15px] font-medium text-leaf-950/80 transition-colors hover:bg-leaf-100 hover:text-leaf-900"
+                  className="rounded-full px-4 py-2.5 text-ui font-medium text-leaf-950/80 transition-colors hover:bg-leaf-100 hover:text-leaf-900"
                 >
                   {item.label}
                 </Link>
@@ -65,14 +65,14 @@ export function SiteHeader() {
         <div className="flex items-center gap-2">
           <Link
             href="/login"
-            className="hidden h-11 items-center gap-2 rounded-full px-4 text-[15px] font-semibold text-leaf-900 transition-colors hover:bg-leaf-100 sm:inline-flex"
+            className="hidden h-11 items-center gap-2 rounded-full px-4 text-ui font-semibold text-leaf-900 transition-colors hover:bg-leaf-100 sm:inline-flex"
           >
             <LogIn className="size-4" aria-hidden />
             Log in
           </Link>
           <Link
             href="/report/new"
-            className="group hidden h-12 items-center gap-2.5 rounded-full bg-primary px-6 text-[15px] font-semibold text-primary-foreground shadow-[0_8px_20px_-8px_rgba(46,100,32,0.6)] transition-[transform,background-color] duration-200 hover:bg-leaf-800 active:scale-[0.97] md:inline-flex"
+            className="group hidden h-12 items-center gap-2.5 rounded-full bg-primary px-6 text-ui font-semibold text-primary-foreground shadow-cta transition-[transform,background-color] duration-200 hover:bg-leaf-800 active:scale-[0.97] md:inline-flex"
           >
             <Leaf className="size-4 transition-transform duration-300 group-hover:-rotate-12" aria-hidden />
             Report an issue

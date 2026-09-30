@@ -16,9 +16,9 @@ export function HowItWorks() {
     <section id="how" aria-labelledby="how-title" className="scroll-mt-24 bg-white py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Reveal className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-bold uppercase tracking-[0.18em] text-leaf-600">How it works</p>
-          <h2 id="how-title" className="mt-3 text-balance text-4xl font-extrabold tracking-[-0.03em] text-leaf-950 sm:text-5xl">
-            A complaint isn&apos;t done <span className="font-serif font-normal italic text-leaf-700">until you say so</span>
+          <p className="eyebrow text-leaf-600">How it works</p>
+          <h2 id="how-title" className="mt-3 section-title text-leaf-950">
+            A complaint isn&apos;t done <span className="accent-serif text-leaf-700">until you say so</span>
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
             Every report follows the same visible path, from photo to proof to your answer. Tap a step.
@@ -55,7 +55,7 @@ export function HowItWorks() {
                       className={cn(
                         "relative z-10 flex size-16 shrink-0 items-center justify-center rounded-2xl border-2 transition-all duration-300 ease-[var(--ease-spring)]",
                         on
-                          ? "scale-110 border-leaf-600 bg-leaf-600 text-white shadow-[0_14px_30px_-12px_rgba(46,100,32,0.7)]"
+                          ? "scale-110 border-leaf-600 bg-leaf-600 text-white shadow-cta"
                           : done
                             ? "border-leaf-500 bg-leaf-100 text-leaf-800"
                             : "border-leaf-100 bg-white text-leaf-700",
@@ -85,7 +85,7 @@ export function HowItWorks() {
             </span>
             <div>
               <p className="text-xl font-bold">{step.title}</p>
-              <p className="mt-2 text-[17px] leading-relaxed text-white/85">{step.body}</p>
+              <p className="mt-2 text-lead leading-relaxed text-white/85">{step.body}</p>
             </div>
           </div>
         </Reveal>

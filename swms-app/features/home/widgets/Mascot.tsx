@@ -70,7 +70,7 @@ export function Mascot({ className }: { className?: string }) {
           key={tip}
           aria-live="polite"
           className={cn(
-            "relative rounded-2xl px-4 py-2.5 text-center text-sm font-semibold shadow-[0_10px_30px_-12px_rgba(22,52,25,0.35)] animate-pop",
+            "relative rounded-2xl px-4 py-2.5 text-center text-sm font-semibold shadow-float animate-pop",
             tapped ? "bg-white text-leaf-950" : "bg-leaf-900 text-white",
           )}
         >

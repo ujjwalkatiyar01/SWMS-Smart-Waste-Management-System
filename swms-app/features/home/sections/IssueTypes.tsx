@@ -21,9 +21,9 @@ export function IssueTypes() {
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Reveal className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
-            <p className="text-sm font-bold uppercase tracking-[0.18em] text-lime-soft">What you can report</p>
-            <h2 id="report-title" className="mt-3 text-balance text-4xl font-extrabold tracking-[-0.03em] sm:text-5xl">
-              Seen a waste problem? <span className="font-serif font-normal italic text-lime-soft">Tell us.</span>
+            <p className="eyebrow text-lime-soft">What you can report</p>
+            <h2 id="report-title" className="mt-3 section-title">
+              Seen a waste problem? <span className="accent-serif text-lime-soft">Tell us.</span>
             </h2>
           </div>
           <Link

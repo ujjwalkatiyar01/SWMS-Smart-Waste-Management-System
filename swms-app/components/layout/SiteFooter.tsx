@@ -12,10 +12,10 @@ export function SiteFooter() {
         <Reveal className="relative overflow-hidden rounded-[2rem] bg-lime-soft px-6 py-12 text-center sm:px-12 sm:py-16">
           <span aria-hidden className="absolute -left-10 -top-10 size-40 rounded-full bg-white/40" />
           <span aria-hidden className="absolute -bottom-16 -right-8 size-56 rounded-full bg-leaf-300/30" />
-          <h2 className="relative text-4xl font-extrabold tracking-[-0.03em] text-leaf-950 sm:text-5xl">
-            Keep your area <span className="font-serif font-normal italic text-leaf-700">clean together</span>
+          <h2 className="relative section-title text-leaf-950">
+            Keep your area <span className="accent-serif text-leaf-700">clean together</span>
           </h2>
-          <p className="relative mx-auto mt-4 max-w-lg text-lg text-leaf-950/75">
+          <p className="relative mx-auto mt-4 max-w-lg text-lg text-leaf-950/80">
             Report a problem in a few taps, then follow it to the end.
           </p>
           <div className="relative mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -51,7 +51,7 @@ export function SiteFooter() {
                 <li key={href}>
                   <Link
                     href={href}
-                    className="inline-flex min-h-11 items-center rounded-lg px-3 text-[15px] font-medium text-leaf-950/75 hover:bg-leaf-50 hover:text-leaf-900"
+                    className="inline-flex min-h-11 items-center rounded-lg px-3 text-ui font-medium text-leaf-950/80 hover:bg-leaf-50 hover:text-leaf-900"
                   >
                     {label}
                   </Link>

@@ -17,13 +17,13 @@ export function CaseTrackerCard({ className }: { className?: string }) {
       onClick={() => setStep((s) => (s + 1) % STEPS.length)}
       aria-label={`Sample case. Status: ${current.status}. ${current.note}. Tap to see the next step.`}
       className={cn(
-        "group w-[250px] rotate-[-3deg] rounded-3xl bg-white p-5 text-left shadow-[0_24px_50px_-24px_rgba(22,52,25,0.45)] ring-1 ring-leaf-100 transition-transform duration-300 ease-[var(--ease-spring)] hover:-translate-y-1 hover:rotate-[-1deg] active:scale-[0.97]",
+        "group w-[250px] rotate-[-3deg] rounded-3xl bg-white p-5 text-left shadow-card ring-1 ring-leaf-100 transition-transform duration-300 ease-[var(--ease-spring)] hover:-translate-y-1 hover:rotate-[-1deg] active:scale-[0.97]",
         className,
       )}
     >
       <div className="flex items-center justify-between gap-2">
-        <span className="text-[15px] font-bold text-leaf-950">Track your case</span>
-        <span className="rounded-full bg-amber-50 px-2 py-0.5 text-[11px] font-semibold text-amber-900 ring-1 ring-amber-300">
+        <span className="text-ui font-bold text-leaf-950">Track your case</span>
+        <span className="rounded-full bg-warning-soft px-2 py-0.5 text-xs font-semibold text-warning ring-1 ring-warning-line">
           Demo
         </span>
       </div>
@@ -50,7 +50,7 @@ export function CaseTrackerCard({ className }: { className?: string }) {
           ))}
         </div>
       </div>
-      <p className="mt-3 text-[11px] font-medium text-leaf-700 opacity-80 group-hover:opacity-100">
+      <p className="mt-3 text-xs font-medium text-leaf-700 opacity-80 group-hover:opacity-100">
         Tap to follow the case →
       </p>
     </button>

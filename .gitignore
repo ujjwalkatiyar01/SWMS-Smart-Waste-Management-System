@@ -22,3 +22,10 @@ venv/
 node_modules/
 .next/
 /DOCUMENTATION/01-PROJECT-PROPOSAL.md
+
+# Local consolidated coding instructions and agent entry point
+/instruction.md
+/AGENTS.md
+
+# Local instruction audit and deletion-proposal record
+/instructions.md
