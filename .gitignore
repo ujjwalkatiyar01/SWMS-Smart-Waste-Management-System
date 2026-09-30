@@ -1,0 +1,24 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+# Kept on this computer only (internal notes, not part of the shared repo)
+/CLAUDE.md
+/AGENT.md
+/ROADMAP.md
+/PHASE-*.md
+/PROPOSED-SOLUTION-AUDIT.md
+/RESEARCH-*.md
+/RESEARCH/
+/INPUTS/
+/SYSTEM DIAGRAMS/
+/PROBLEM STATEMENT DETAIL/
+
+# Node / Next.js (also covered in swms-app/.gitignore)
+node_modules/
+.next/
+/DOCUMENTATION/01-PROJECT-PROPOSAL.md
