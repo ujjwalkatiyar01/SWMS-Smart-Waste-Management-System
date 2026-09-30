@@ -129,16 +129,7 @@ npm run dev
 
 Open **http://localhost:3000**. Only the home page exists so far; it needs no keys.
 
-When the backend is added, create `swms-app/.env.local` with these names (values come from your own Supabase project and Google AI Studio; never commit them):
 
-```
-NEXT_PUBLIC_SUPABASE_URL=
-NEXT_PUBLIC_SUPABASE_ANON_KEY=
-SUPABASE_SERVICE_ROLE_KEY=      # server only
-GEMINI_API_KEY=                 # server only
-```
-
----
 
 ## 8. Repository map
 
