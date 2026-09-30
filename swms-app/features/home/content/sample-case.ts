@@ -1,9 +1,3 @@
-// ─────────────────────────────────────────────────────────────
-// Content · Home › Sample case tracker
-// The statuses the demo case card steps through on each tap.
-// Used by: features/home/widgets/CaseTrackerCard.tsx
-// ─────────────────────────────────────────────────────────────
-
 import { Camera, CircleCheck, ClipboardCheck, UserCheck } from "lucide-react";
 
 // Sample case (demo data) following the case lifecycle in 03-FULL-APP-FLOW F3–F4.

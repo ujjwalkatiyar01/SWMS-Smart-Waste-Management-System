@@ -1,13 +1,6 @@
 "use client";
 
-// ─────────────────────────────────────────────────────────────
-// Widget · Home › Bin mascot
-// Inline-SVG bin character: eyes follow the pointer, a tap shows
-// the next tip, winks, hops and bursts leaves.
-// Client component: pointer tracking, timers and tap state.
-// Used by: features/home/sections/Hero.tsx
-// Uses:    content/mascot-tips
-// ─────────────────────────────────────────────────────────────
+// Bin mascot: eyes follow the pointer; a tap shows the next tip.
 
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";

@@ -1,10 +1,4 @@
-// ─────────────────────────────────────────────────────────────
-// Module · Home › Features (section id="features")
-// Grid of the six required features, each linking to its screen.
-// Used by: features/home/index.ts → app/(public)/page.tsx
-// Uses:    content/features, shared/Reveal
-// Spec:    02-PRD F1–F6
-// ─────────────────────────────────────────────────────────────
+// Home "Features": the six required features (02-PRD F1–F6).
 
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";

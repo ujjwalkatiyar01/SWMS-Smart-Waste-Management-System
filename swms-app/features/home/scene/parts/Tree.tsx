@@ -1,9 +1,3 @@
-// ─────────────────────────────────────────────────────────────
-// Scene part · Tree
-// Round park tree; `shade` picks one of two green palettes.
-// Used by: features/home/scene/HeroScene.tsx
-// ─────────────────────────────────────────────────────────────
-
 export function Tree({ x, y, s = 1, shade = 0 }: { x: number; y: number; s?: number; shade?: number }) {
   const tones = [
     ["#3f7f2c", "#5a9b3a", "#7cb652"],

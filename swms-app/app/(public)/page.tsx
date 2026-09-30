@@ -1,8 +1,4 @@
-// ─────────────────────────────────────────────────────────────
-// Route · "/" — Home page (public, no login)
-// Only assembles the page; each section lives in features/home/.
-// Spec: 01-FRONTEND §3 route "/"
-// ─────────────────────────────────────────────────────────────
+// Home page "/" (public). Sections live in features/home.
 
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";

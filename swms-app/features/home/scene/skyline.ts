@@ -1,8 +1,4 @@
-// ─────────────────────────────────────────────────────────────
-// Data · Home › Park scene skyline
-// Fixed building positions and the ground line of the SVG scene.
-// Used by: scene/HeroScene.tsx, scene/parts/Tower.tsx
-// ─────────────────────────────────────────────────────────────
+// Fixed building positions and ground line for the park scene.
 
 export type Building = { x: number; w: number; h: number; tone: number; spire?: boolean };
 

@@ -1,9 +1,3 @@
-// ─────────────────────────────────────────────────────────────
-// Content · Home › Features
-// The six required features, each linking to its screen.
-// Used by: features/home/sections/Features.tsx
-// ─────────────────────────────────────────────────────────────
-
 import { BookOpen, Camera, LayoutDashboard, ListChecks, Truck, UserPlus } from "lucide-react";
 
 // The six required features (problem statement / 02-PRD F1–F6).

@@ -1,13 +1,6 @@
 "use client";
 
-// ─────────────────────────────────────────────────────────────
-// Module · Home › How it works (section id="how")
-// Interactive five-step loop: tap a step to see who does what.
-// Client component: keeps the active step in state.
-// Used by: features/home/index.ts → app/(public)/page.tsx
-// Uses:    content/how-it-works, shared/Reveal
-// Spec:    03-FULL-APP-FLOW F3–F7 (closed loop)
-// ─────────────────────────────────────────────────────────────
+// Home "How it works": the five-step complaint loop (03-FULL-APP-FLOW F3–F7).
 
 import { useState } from "react";
 import { Reveal } from "@/components/shared/Reveal";

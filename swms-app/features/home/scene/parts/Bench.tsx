@@ -1,9 +1,3 @@
-// ─────────────────────────────────────────────────────────────
-// Scene part · Bench
-// Park bench on the footpath; `flip` mirrors it.
-// Used by: features/home/scene/HeroScene.tsx
-// ─────────────────────────────────────────────────────────────
-
 export function Bench({ x, flip = false }: { x: number; flip?: boolean }) {
   return (
     <g transform={`translate(${x} 505) scale(${flip ? -1 : 1} 1)`}>

@@ -1,11 +1,4 @@
-// ─────────────────────────────────────────────────────────────
-// Module · Home › What you can report (section id="report")
-// Five issue-type cards; each flips from icon to an example photo
-// and links to the report form.
-// Used by: features/home/index.ts → app/(public)/page.tsx
-// Uses:    widgets/FlipMedia, content/issue-types, shared/Reveal
-// Spec:    02-PRD F2 · 03-FULL-APP-FLOW F3.1
-// ─────────────────────────────────────────────────────────────
+// Home "What you can report": issue-type flip cards (02-PRD F2).
 
 import Image from "next/image";
 import Link from "next/link";

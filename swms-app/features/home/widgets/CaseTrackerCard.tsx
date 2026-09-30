@@ -1,13 +1,6 @@
 "use client";
 
-// ─────────────────────────────────────────────────────────────
-// Widget · Home › Sample case tracker card
-// Tappable card that steps through a demo case's statuses.
-// Client component: keeps the current step in state.
-// Used by: features/home/sections/Hero.tsx
-// Uses:    content/sample-case
-// Spec:    03-FULL-APP-FLOW F3–F4 (case lifecycle)
-// ─────────────────────────────────────────────────────────────
+// Tappable sample case that steps through the case statuses.
 
 import { useState } from "react";
 import { cn } from "@/lib/utils";

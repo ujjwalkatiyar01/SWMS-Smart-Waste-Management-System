@@ -1,9 +1,3 @@
-// ─────────────────────────────────────────────────────────────
-// Scene part · Cloud
-// White cloud; drift animation is set by the parent <g>.
-// Used by: features/home/scene/HeroScene.tsx
-// ─────────────────────────────────────────────────────────────
-
 export function Cloud({ x, y, s = 1 }: { x: number; y: number; s?: number }) {
   return (
     <g transform={`translate(${x} ${y}) scale(${s})`} fill="#ffffff">

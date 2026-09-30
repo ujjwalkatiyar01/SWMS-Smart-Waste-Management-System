@@ -1,10 +1,4 @@
-// ─────────────────────────────────────────────────────────────
-// Content · Site header navigation
-// Used by: components/layout/SiteHeader.tsx (desktop and mobile menus)
-// Note: the "#…" links point to sections of the home page, so they
-// only scroll correctly on "/". Change them to "/#…" before the
-// header is reused on other pages (login, sign-up, awareness).
-// ─────────────────────────────────────────────────────────────
+// Header links. "#…" targets exist only on "/"; use "/#…" before reusing the header on other pages.
 
 export const NAV = [
   { href: "#how", label: "How it works" },

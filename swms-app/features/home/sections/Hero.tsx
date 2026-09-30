@@ -1,12 +1,4 @@
-// ─────────────────────────────────────────────────────────────
-// Module · Home › Hero section (first screen)
-// Headline, the two main calls to action, the animated park scene
-// with the mascot, quick links and the sample case card.
-// Used by: features/home/index.ts → app/(public)/page.tsx
-// Uses:    scene/HeroScene, widgets/Mascot, widgets/CaseTrackerCard,
-//          content/hero-points
-// Spec:    01-FRONTEND §3 route "/"
-// ─────────────────────────────────────────────────────────────
+// Home hero: headline, calls to action, park scene with mascot, quick links, sample case.
 
 import Link from "next/link";
 import { ArrowRight, BookOpen, Camera, TreeDeciduous } from "lucide-react";

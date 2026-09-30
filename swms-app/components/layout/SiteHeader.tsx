@@ -1,13 +1,6 @@
 "use client";
 
-// ─────────────────────────────────────────────────────────────
-// Layout · Site header (public pages)
-// Sticky top bar: logo, main navigation, "Log in", "Report an issue",
-// and the mobile menu. Becomes solid once the page is scrolled.
-// Client component: scroll state, menu open/close, Escape key.
-// Used by: app/(public)/page.tsx
-// Uses:    shared/Logo, nav-links
-// ─────────────────────────────────────────────────────────────
+// Sticky site header with desktop and mobile navigation.
 
 import Link from "next/link";
 import { useEffect, useState } from "react";

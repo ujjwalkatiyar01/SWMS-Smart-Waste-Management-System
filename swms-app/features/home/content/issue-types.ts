@@ -1,9 +1,3 @@
-// ─────────────────────────────────────────────────────────────
-// Content · Home › What you can report
-// The five issue types shown as flip cards (icon ↔ example photo).
-// Used by: features/home/sections/IssueTypes.tsx
-// ─────────────────────────────────────────────────────────────
-
 import { CalendarX, Recycle, Route, Trash2, TriangleAlert } from "lucide-react";
 
 // Photos: Unsplash License, credits in public/images/issues/CREDITS.md (illustrations, not app data).

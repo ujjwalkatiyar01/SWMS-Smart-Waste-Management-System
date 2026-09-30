@@ -1,9 +1,3 @@
-// ─────────────────────────────────────────────────────────────
-// Content · Home › How it works
-// The five steps of the closed complaint loop, in order.
-// Used by: features/home/sections/HowItWorks.tsx
-// ─────────────────────────────────────────────────────────────
-
 import { Camera, History, MessageSquareHeart, ShieldCheck, UserCheck } from "lucide-react";
 
 // The closed loop from 01-PROJECT-PROPOSAL and 03-FULL-APP-FLOW F3–F7.

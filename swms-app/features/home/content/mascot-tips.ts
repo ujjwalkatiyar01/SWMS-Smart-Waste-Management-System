@@ -1,9 +1,3 @@
-// ─────────────────────────────────────────────────────────────
-// Content · Home › Mascot tips
-// One tip is shown in the speech bubble per tap, in this order.
-// Used by: features/home/widgets/Mascot.tsx
-// ─────────────────────────────────────────────────────────────
-
 // Tips describe what the app does (03-FULL-APP-FLOW F3–F6), not outside facts.
 export const TIPS = [
   "Spotted an overflowing bin? Snap a photo and report it.",

@@ -1,9 +1,4 @@
-// ─────────────────────────────────────────────────────────────
-// Layout · Site footer (public pages)
-// Closing call to action, logo, footer links and the sample-data note.
-// Used by: app/(public)/page.tsx
-// Uses:    shared/Logo, shared/Reveal
-// ─────────────────────────────────────────────────────────────
+// Site footer: closing call to action, links, sample-data note.
 
 import Link from "next/link";
 import { ArrowRight, Camera } from "lucide-react";

@@ -1,11 +1,3 @@
-// ─────────────────────────────────────────────────────────────
-// Module · Home › Park scene (decorative backdrop of the hero)
-// Assembles the SVG layers back to front: clouds → birds → skyline
-// → tree line → ground and footpaths → trees, benches, lamps → grass.
-// Used by: features/home/sections/Hero.tsx
-// Uses:    skyline (data), parts/Tower, Tree, Bench, Lamp, Cloud
-// ─────────────────────────────────────────────────────────────
-
 /**
  * Decorative park + skyline backdrop for the home hero (inline SVG, no image
  * request). Mirrors the city-and-park scene inside the SWMS logo.

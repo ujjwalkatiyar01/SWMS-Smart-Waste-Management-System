@@ -1,9 +1,3 @@
-// ─────────────────────────────────────────────────────────────
-// Scene part · Tower
-// Building of the skyline; near buildings (tone 1) get lit windows.
-// Used by: features/home/scene/HeroScene.tsx
-// ─────────────────────────────────────────────────────────────
-
 import { GROUND, type Building } from "../skyline";
 
 export function Tower({ b }: { b: Building }) {

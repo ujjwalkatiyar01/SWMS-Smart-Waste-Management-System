@@ -1,9 +1,3 @@
-// ─────────────────────────────────────────────────────────────
-// Scene part · Lamp
-// Street lamp.
-// Used by: features/home/scene/HeroScene.tsx
-// ─────────────────────────────────────────────────────────────
-
 export function Lamp({ x, y = 520, s = 1 }: { x: number; y?: number; s?: number }) {
   return (
     <g transform={`translate(${x} ${y}) scale(${s})`}>
