@@ -11,7 +11,7 @@ import { relative } from "@/lib/time";
 import { checkOpenCase, followReport, resolveQr } from "../actions";
 import { issueLabel } from "../content/labels";
 import type { OpenCase, ReportLocation } from "../schema";
-import { QrScanner } from "./QrScanner";
+import { QrScanner } from "@/components/shared/QrScanner";
 
 export interface Gps {
   lat: number;
