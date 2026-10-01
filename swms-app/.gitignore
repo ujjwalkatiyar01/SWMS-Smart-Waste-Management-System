@@ -44,3 +44,7 @@ next-env.d.ts
 # AI coding-tool notes written by next dev (kept local)
 /AGENTS.md
 /CLAUDE.md
+
+# Playwright
+/test-results/
+/playwright-report/

@@ -63,8 +63,11 @@
 |---|---|---|---|
 | `/` 🆕 | Public | Home page: logo, headline, animated park scene with a tappable bin mascot (tips about what the app does), demo case tracker card (tap to step through submitted → assigned → awaiting review → closed, labelled Demo), how-it-works loop (tap a step), issue types, the six features, calls to action (Report an issue, Segregation guide, Log in, Sign up); no invented statistics | User request 2026-09-30 |
 | `/awareness` | Public | Wet, dry, hazardous, e-waste; which bin; disposal tips; how to use the app; EN / हिन्दी toggle; source per item; "Report an issue" / "Request a pickup" buttons | F10 |
+| `/awareness` — as built 🆕 | Public | Follows the Solid Waste Management Rules, 2026 (in force 1 April 2026, replacing the 2016 rules): four streams **wet, dry, sanitary, special care** (special care = the earlier "hazardous"), plus e-waste (E-Waste (Management) Rules, 2022). Text and official PIB sources (English + Hindi releases) in `content/awareness.json`; stream names and examples use the official PIB Hindi release; UI strings and the "how to use" steps in Hindi still need a Hindi-speaking team member's check (PRD F6). No bin colours shown (not verified for the 2026 rules). "Request a pickup" button added when `/pickup/new` exists; "Which bin?" when the AI route exists. Code: `features/awareness/` | F10 |
 | `/awareness` — "Which bin?" | Logged in | Photo → AI bin suggestion, no report created; limit message "Try again tomorrow, or see the guide below" | F10.1b |
 | `/login`, `/signup` | Public | Sign-up: name, email, phone (optional), password, organisation, home area (lists from `list_orgs_for_signup`, `list_areas_for_signup`) | F1 |
+| `/login`, `/signup` — look 🆕 | Public | One shared layout (`app/(public)/(auth)/layout.tsx`): framed panel, slowly turning planet behind the frame, floating clean-city island (towers, trees, wind turbine, pond, sorted bins), liquid-glass card with a Log in / Sign up switch (each tab is its own URL); bottom-left notch links to Home and the segregation guide; show/hide password; errors under each field; "Preview mode" note while accounts are browser-only | User request 2026-09-30 |
+| `/login`, `/signup` — visual update 🆕 | Public | The earlier floating island is replaced in the shared layout by a locally stored, generated realistic city scene (`public/images/auth/clean-city-scene.webp`, shown as conceptual art). The headline reads "Cleaner city, one report at a time." Login copy: "Spot a problem. Follow the fix." The form, links and preview notice stay in place. | User request 2026-09-30 |
 | `/reset-password`, `/update-password` 🆕 | Public | Ask for reset link; set new password from the link | F1.4 |
 | `/my` | Resident | Own reports, followed cases, pickups (status, owner first name, due, overdue, timeline); next collection in my area; points, badges (10/30/50), opt-in leaderboard; vehicle estimate for a pickup on a trip | F8, F12.3, F13.7, F9.6 |
 | `/report/new` | Resident, admin | Issue type → photo (required) → AI suggestion → location (GPS / registered / QR / address) → duplicate warning → note → submit | F3 |
@@ -142,6 +145,7 @@
 | Type | Plus Jakarta Sans (interface), Instrument Serif italic (accent word in headings only); sizes from the Tailwind scale plus `text-ui` (15px) and `text-lead` (17px); minimum `text-xs` (12px) | |
 | Text styles | `eyebrow` (small uppercase section label), `section-title` (section heading), `accent-serif` (serif accent inside a heading) | Same heading look on every page |
 | Shadows | `shadow-card`, `shadow-float`, `shadow-cta` | Cards, floating bubbles, primary buttons |
+| Glass + motion 🆕 | `shadow-glass`, `sky-mid`; `animate-float`, `animate-blob`, `animate-turn`, `animate-orbit`, `animate-enter` | Liquid-glass card and its moving colour blobs, floating island, turbine, planet, form entrance (login/sign-up); all off under reduced motion |
 
 Contrast checked (WCAG AA ≥ 4.5:1 for text): lowest pair on the home page is `leaf-600` on `cream`, 4.99:1. The illustration SVGs (park scene, mascot) keep their own fixed colours; they are artwork, not interface.
 
@@ -169,11 +173,13 @@ features/<feature>/  🆕 one folder per feature, entry point index.ts; pages im
   home/scene/        HeroScene + skyline data + parts/ (Tower, Tree, Bench, Lamp, Cloud)
   home/content/      page text and lists (no UI code)
   auth/ …            next: login and sign-up follow the same pattern
+  auth/ 🆕           sections/AuthShell · widgets/ LoginForm, SignUpForm, AuthTabs, fields, SubmitButton, useAuthForm · scene/ CleanCityIsland, PlanetBackdrop · schema.ts (zod) · actions.ts (login, signUp, getSignUpOptions; demo until the backend exists)
 components/ui/       shadcn/ui components
 public/brand/logo.png 🆕 logo as supplied
 lib/validation/      zod schemas shared with the backend
 lib/time.ts          organisation time-zone formatting
-content/awareness.json
+content/awareness.json      🆕 built: streams, how-to steps, UI text, sources (EN + HI)
+features/awareness/         🆕 AwarenessGuide section, LanguageToggle + useLanguage (choice kept in browser storage)
 ```
 
 ---
@@ -198,3 +204,18 @@ content/awareness.json
 ## 10. Confirm at setup [Verify]
 
 🆕 **Next.js 16 renamed `middleware.ts` to `proxy.ts`** (checked in the installed Next.js 16.3.7 docs); 04-AUTH N2 still says middleware — team to confirm before auth work · QR library choice · HEIC library and browser behaviour · `next/font` Noto Sans Devanagari · shadcn/ui icon set · current versions recorded in `package.json`.
+
+### Implementation checkpoint 🆕 (2026-10-01)
+
+The current app includes `/pickup/new`, `/pickup/[id]`, pickup cards in `/my`, admin/worker pickup links, a notification bell with 30-second refresh, and `/reset-password` plus `/update-password`. Pickup pages follow the existing home palette and typography. The shared auth frame now uses the generated clean-city photo alongside the form, with the requested headline and login punchline; the earlier decorative scene source remains in the repository. The awareness page links to the pickup form. The pickup flow and auth frame compiled in the production build; live email delivery still depends on Supabase email configuration and an allowed redirect URL. Other planned routes in section 3 remain unimplemented unless listed in the build output.
+
+🆕 The report form now requests an AI photo suggestion after a photo is chosen, and the awareness page has the separate “Which bin?” helper. Both keep manual guidance when the AI key is absent, over limit or unavailable. The UI uses the existing home design tokens. The helper copy is marked English within the bilingual guide; Hindi copy still requires a Hindi-speaking review before calling it localized.
+
+### Implementation checkpoint 🆕 (2026-10-01, case lifecycle, admin tools, resident extras)
+
+Built beyond the earlier checkpoint, all using the existing tokens and shared layout:
+- `/case/[id]` shows role panels only where 03 §7 allows them: admin **review** (reject while submitted, close with a reason and a "counts for points" choice, correct the issue type), worker **return task** with a reason, **delay note** (admin or assigned worker, only when overdue), supervisor / higher-authority **instruction**, reporter or follower **add evidence** (photo and/or note; shown with its photo on the timeline), reporter **reopen** inside the reopen window. The duplicate notice on the report form now offers **Follow this case**.
+- `/admin/cases` 🆕 (not listed in §3): all cases filtered by status, type and area; the filters live in the URL and every dashboard count links to its filter. `/admin/location/[id]`: a place's repeat-incident flag, risk score, cases, and prevention reviews (create, mark done with outcome). `/admin/map`: Leaflet + OpenStreetMap, loaded only in the browser, attribution visible, pins by worst open case, dark ring for flagged places, circle size by predicted risk, a legend, and a text list so nothing depends on colour. `/admin/setup` gains **People** (invite worker or supervisor, deactivate, reactivate). The admin dashboard has a toolbar (cases, map, setup) and a CSV export form.
+- `/my` now also shows the next routine collection for the resident's area, points and badges (10 / 30 / 50 verified reports), the opt-in area leaderboard (first name and points only) and "Cases I follow" (summary only).
+- New shared piece: `components/shared/ReasonForm` (one required text field plus extra controls, pending state, plain errors, refresh on success). `StatCard` accepts an optional link.
+- Still not built from §3: `/worker/trip`, `/admin/trips`, `/admin/flags`, `/admin/audit`. Not verified: the real invite email (Supabase built-in email only reaches team addresses) and a real phone (camera, GPS, QR scan).

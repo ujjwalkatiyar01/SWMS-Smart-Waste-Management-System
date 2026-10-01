@@ -64,6 +64,8 @@ Node.js **24 LTS** on Vercel. Current stable version of each package, recorded i
 6. npm run dev
 ```
 
+🆕 **Without Docker (current laptop):** `npm run test:schema` (PGlite, stand-ins for Supabase Auth, pg_cron, storage) → `npm run db:push -- --dry-run` → `npm run db:push` (migrations + seed.sql to the hosted project via `SUPABASE_DB_URL`) → `npm run seed:users` → `npm run check:db` → `npm run db:types`. Scripts read `.env.local` and never print it.
+
 Schema changes: new file in `supabase/migrations/` → `supabase db reset` locally → push to the Supabase project (`supabase db push`) [Verify].
 
 ---
@@ -126,3 +128,9 @@ tests/unit/ (vitest)  tests/e2e/ (playwright)  tests/schema/ (PGlite smoke test)
 ## 11. Confirm at setup [Verify]
 
 Vercel and Supabase free limits · region availability · Docker for local Supabase · `supabase db push` flow · pgTAP.
+
+### Implementation checkpoint 🆕 (2026-10-01, scripts and tests)
+
+- `npm run seed:demo` adds or refreshes the sample scenario in both organisations (about 12 cases in every status and flag, a place with repeat incidents and a prevention review, pickups in every state including a missed one with its linked complaint, a follower, points, risk scores, a vehicle and morning schedules per area). Fixed ids, times relative to now, nothing deleted. `npm run reset:demo` first deletes every case, pickup and related row of the two demo organisations (including test data) and their stored photos, then seeds again. It is the project's version of `scripts/reset-demo` in §6 and leaves users, places and settings alone (except two sample leaderboard choices).
+- Tests: `npm run test:unit` (Vitest), `npm run test:schema` (PGlite, 43 tests), `npm run test:e2e` (Playwright with the installed Chrome: role logins and access rules, the core story, pickups, the case lifecycle). The end-to-end tests use the sample logins and remove what they create.
+- Commands that read `.env.local` (`check:db`, `db:push`, `seed:*`) need Node 22 or newer.

@@ -1,0 +1,139 @@
+{
+  "sources": {
+    "swm2026": {
+      "en": {
+        "title": "PIB, Ministry of Environment, Forest and Climate Change: Solid Waste Management Rules, 2026 notified (28 Jan 2026)",
+        "url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2219676"
+      },
+      "hi": {
+        "title": "पीआईबी, पर्यावरण, वन एवं जलवायु परिवर्तन मंत्रालय: ठोस अपशिष्ट प्रबंधन नियम, 2026 अधिसूचित (28 जनवरी 2026)",
+        "url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2219760"
+      }
+    },
+    "ewaste2022": {
+      "en": {
+        "title": "PIB, Ministry of Environment, Forest and Climate Change: E-Waste (Management) Rules, 2022 in force since 1 April 2023 (14 Dec 2023)",
+        "url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=1986201"
+      },
+      "hi": {
+        "title": "पीआईबी, पर्यावरण, वन एवं जलवायु परिवर्तन मंत्रालय: ई-अपशिष्ट (प्रबंधन) नियम, 2022, 1 अप्रैल 2023 से लागू (14 दिसंबर 2023)",
+        "url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=1986308"
+      }
+    }
+  },
+  "ui": {
+    "en": {
+      "eyebrow": "Waste awareness",
+      "title": "Separate at home.",
+      "titleAccent": "Four streams.",
+      "intro": "Since 1 April 2026, India's Solid Waste Management Rules, 2026 require every household to separate its waste into four streams. Electronics follow their own rules.",
+      "examples": "For example",
+      "next": "What happens next",
+      "source": "Source",
+      "howTitle": "How to use SWMS",
+      "report": "Report an issue",
+      "language": "Language"
+    },
+    "hi": {
+      "eyebrow": "कचरा जागरूकता",
+      "title": "घर पर ही अलग करें।",
+      "titleAccent": "चार हिस्से।",
+      "intro": "1 अप्रैल 2026 से ठोस अपशिष्ट प्रबंधन नियम, 2026 के अनुसार हर घर को अपना कचरा चार हिस्सों में अलग करना होगा। इलेक्ट्रॉनिक कचरे के लिए अलग नियम हैं।",
+      "examples": "उदाहरण",
+      "next": "आगे क्या होता है",
+      "source": "स्रोत",
+      "howTitle": "SWMS का उपयोग कैसे करें",
+      "report": "समस्या की रिपोर्ट करें",
+      "language": "भाषा"
+    }
+  },
+  "streams": [
+    {
+      "id": "wet",
+      "source": "swm2026",
+      "en": {
+        "name": "Wet waste",
+        "examples": ["Kitchen waste", "Vegetables", "Fruit peels", "Meat", "Flowers"],
+        "next": "Composted or processed through bio-methanation at the nearest facility."
+      },
+      "hi": {
+        "name": "गीला अपशिष्ट",
+        "examples": ["रसोई का कचरा", "सब्जियां", "फलों के छिलके", "मांस", "फूल"],
+        "next": "निकटतम सुविधा केंद्र में खाद बनाकर या जैव-मेथेनीकरण से संसाधित किया जाता है।"
+      }
+    },
+    {
+      "id": "dry",
+      "source": "swm2026",
+      "en": {
+        "name": "Dry waste",
+        "examples": ["Plastic", "Paper", "Metal", "Glass", "Wood", "Rubber"],
+        "next": "Sent to Material Recovery Facilities (MRFs) for sorting and recycling."
+      },
+      "hi": {
+        "name": "सूखा अपशिष्ट",
+        "examples": ["प्लास्टिक", "कागज", "धातु", "कांच", "लकड़ी", "रबर"],
+        "next": "छंटाई और पुनर्चक्रण के लिए सामग्री पुनर्प्राप्ति सुविधाओं (एमआरएफ) में भेजा जाता है।"
+      }
+    },
+    {
+      "id": "sanitary",
+      "source": "swm2026",
+      "en": {
+        "name": "Sanitary waste",
+        "examples": ["Used diapers", "Sanitary towels", "Tampons", "Condoms"],
+        "next": "Wrap it securely and store it separately."
+      },
+      "hi": {
+        "name": "स्वच्छता अपशिष्ट",
+        "examples": ["उपयोग किए गए डायपर", "सैनिटरी पैड", "टैम्पोन", "कंडोम"],
+        "next": "इसे सुरक्षित रूप से लपेटकर अलग रखें।"
+      }
+    },
+    {
+      "id": "special",
+      "source": "swm2026",
+      "en": {
+        "name": "Special care waste",
+        "examples": ["Paint cans", "Bulbs", "Mercury thermometers", "Medicines"],
+        "next": "Collected by authorised agencies or deposited at designated collection centres."
+      },
+      "hi": {
+        "name": "विशेष देखभाल अपशिष्ट",
+        "examples": ["पेंट के डिब्बे", "बल्ब", "पारे वाले थर्मामीटर", "दवाइयां"],
+        "next": "अधिकृत एजेंसियां इकट्ठा करती हैं, या इसे निर्दिष्ट संग्रहण केंद्रों पर जमा किया जाता है।"
+      }
+    },
+    {
+      "id": "ewaste",
+      "source": "ewaste2022",
+      "en": {
+        "name": "E-waste",
+        "examples": ["Electrical and electronic equipment at the end of its useful life"],
+        "next": "Only registered producers, recyclers and refurbishers may collect and process it. Crude processing or open dumping can harm health and the environment."
+      },
+      "hi": {
+        "name": "ई-कचरा",
+        "examples": ["उपयोगी जीवन पूरा कर चुके बिजली और इलेक्ट्रॉनिक उपकरण"],
+        "next": "इसे केवल पंजीकृत उत्पादक, पुनर्चक्रणकर्ता और नवीनीकरणकर्ता ही इकट्ठा और संसाधित कर सकते हैं। अवैज्ञानिक तरीके या खुले में फेंकने से स्वास्थ्य और पर्यावरण को नुकसान हो सकता है।"
+      }
+    }
+  ],
+  "howTo": [
+    {
+      "id": "report",
+      "en": { "title": "Report", "text": "Take a photo of the problem, confirm the location and send it." },
+      "hi": { "title": "रिपोर्ट करें", "text": "समस्या की फ़ोटो लें, जगह की पुष्टि करें और भेजें।" }
+    },
+    {
+      "id": "track",
+      "en": { "title": "Track", "text": "Follow every step until the case is fixed." },
+      "hi": { "title": "ट्रैक करें", "text": "मामला ठीक होने तक हर कदम देखें।" }
+    },
+    {
+      "id": "confirm",
+      "en": { "title": "Confirm", "text": "Check the after-photo and tell us whether it is really fixed." },
+      "hi": { "title": "पुष्टि करें", "text": "काम के बाद की फ़ोटो देखें और बताएं कि समस्या सच में ठीक हुई या नहीं।" }
+    }
+  ]
+}

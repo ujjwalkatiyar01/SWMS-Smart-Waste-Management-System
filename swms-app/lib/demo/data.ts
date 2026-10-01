@@ -20,14 +20,6 @@ export const USERS: DemoUser[] = [
   { id: "u-wrk-2", name: "Sunita Devi", role: "worker", title: "Sanitation worker", email: "sunita@citywarda.demo", area: "Station Road" },
 ];
 
-/** One sign-in account per role shown on the login page (frontend preview; no real accounts yet). */
-export const LOGIN_ACCOUNTS: Record<Role, string> = {
-  resident: "u-res-1",
-  admin: "u-adm-1",
-  worker: "u-wrk-1",
-};
-export const PREVIEW_PASSWORD = "demo1234";
-
 export const ROLE_HOME: Record<Role, string> = {
   resident: "/my",
   admin: "/admin",

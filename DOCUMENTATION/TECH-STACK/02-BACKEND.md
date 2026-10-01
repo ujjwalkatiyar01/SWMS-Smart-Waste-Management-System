@@ -160,3 +160,11 @@ Vitest for `lib/errors.ts`, `lib/photos.ts` (a photo with GPS EXIF comes out wit
 ## 12. Confirm at setup [Verify]
 
 `@supabase/ssr` usage for the current Next.js version · Node.js runtime for `sharp` · body size limits · `sharp` output has no metadata.
+
+### Implementation checkpoint 🆕 (2026-10-01)
+
+Pickup changes use server actions backed by the eight database functions in the new pickup migration. A dedicated, authenticated `/api/pickup-photo` handler verifies scheduled status and worker/admin permission before storing a private JPEG; the database function validates its organisation/pickup path. The existing report-photo endpoint is unchanged. Password recovery uses Supabase Auth's reset email and a PKCE callback route; its redirect origin and Supabase allowlist must be configured for the deployed site.
+
+### Implementation checkpoint 🆕 (2026-10-01, case lifecycle, exports, staff)
+
+Server actions now exist for every case change in §5 "Case lifecycle" except `set_waste_category`: reject, close, correct type (`features/admin/actions.ts`), return (`features/worker/actions.ts`), delay note (`features/staff/actions.ts`), instruction (`features/escalations/actions.ts`), reopen, add evidence and follow (`features/reports/actions.ts`). Each parses input with zod, calls the database function as the user, and maps the database message through `toUserMessage`. `POST /api/photos` also accepts `kind=evidence` for the reporter, or a follower while the case is open; a failed save removes the uploaded file. Prevention reviews are admin writes under row rules. `GET /api/export` (admin only) builds reports or pickups as CSV with formula-cell escaping (`lib/csv.ts`, unit-tested), days in the organisation's time zone, no resident names or contact details. Staff invites use the admin client (use 4 in §3): `inviteUserByEmail`, then the role is set. `next.config.ts` sets `logging.serverFunctions: false`, because the development log otherwise prints every server-action argument, including passwords. Node 22 or newer is required for the Supabase client outside the browser (see `.nvmrc`).

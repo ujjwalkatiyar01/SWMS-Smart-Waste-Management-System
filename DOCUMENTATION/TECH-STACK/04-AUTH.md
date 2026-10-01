@@ -123,3 +123,7 @@ For each role of both organisations: log in → correct home; try to open anothe
 ## 10. Confirm at setup [Verify]
 
 `@supabase/ssr` pattern for the Next.js version · session lifetime · password minimum · anon vs publishable key naming.
+
+### Implementation checkpoint 🆕 (2026-10-01)
+
+`/reset-password` requests the Supabase Auth recovery email; `/auth/callback` exchanges the PKCE code and `/update-password` changes the password in the recovered session. The redirect uses `NEXT_PUBLIC_SITE_URL` when set, or the request origin for local use. Supabase must allow the callback URL and its demo email service remains limited to team addresses until custom SMTP is configured. Email delivery and the full link round trip have not yet been verified live.
