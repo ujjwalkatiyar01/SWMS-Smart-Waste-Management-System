@@ -7,7 +7,7 @@ import { logout } from "@/features/auth";
 import { NotificationBell } from "@/features/notifications";
 import type { NotificationItem } from "@/features/notifications/schema";
 import { firstName, type CurrentUser } from "@/lib/auth/session";
-import { ROLE_HOME, ROLE_LABEL } from "@/lib/roles";
+import { ROLE_HOME, roleLabel } from "@/lib/roles";
 import { LogoutButton } from "./LogoutButton";
 
 export function AppHeader({ user, notifications }: { user: CurrentUser; notifications: NotificationItem[] }) {
@@ -29,7 +29,7 @@ export function AppHeader({ user, notifications }: { user: CurrentUser; notifica
           <p className="flex items-center gap-2 text-sm">
             <UserRound className="hidden size-4 text-leaf-700 sm:block" aria-hidden />
             <span className="font-semibold text-leaf-950">{firstName(user.name)}</span>
-            <span className="rounded-full bg-leaf-100 px-2 py-0.5 text-xs font-semibold text-leaf-800">{ROLE_LABEL[user.role]}</span>
+            <span className="rounded-full bg-leaf-100 px-2 py-0.5 text-xs font-semibold text-leaf-800">{roleLabel(user.role, user.workerType)}</span>
           </p>
           <form action={logout}>
             <LogoutButton />
