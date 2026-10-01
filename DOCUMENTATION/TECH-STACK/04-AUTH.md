@@ -127,3 +127,7 @@ For each role of both organisations: log in → correct home; try to open anothe
 ### Implementation checkpoint 🆕 (2026-10-01)
 
 `/reset-password` requests the Supabase Auth recovery email; `/auth/callback` exchanges the PKCE code and `/update-password` changes the password in the recovered session. The redirect uses `NEXT_PUBLIC_SITE_URL` when set, or the request origin for local use. Supabase must allow the callback URL and its demo email service remains limited to team addresses until custom SMTP is configured. Email delivery and the full link round trip have not yet been verified live.
+
+### Implementation checkpoint 🆕 (2026-10-01, verified staff sign-up)
+
+User decision: sign-up offers Resident, Worker (waste collector or driver) and Administrator. Worker and administrator sign-ups need a staff ID and work email listed in the organisation's staff list (`staff_roster`, migration `20261001000800`); the sign-up trigger gives the role and worker type from that list, never from the form, and each ID works once. This qualifies the earlier rule "sign-up always creates a resident" (06 §6); invites from Setup → People still work. The list is the organisation's own record, not a government check. With email confirmation off (D3), knowing a listed ID and its email is enough to claim it — enable confirmation before real use.
