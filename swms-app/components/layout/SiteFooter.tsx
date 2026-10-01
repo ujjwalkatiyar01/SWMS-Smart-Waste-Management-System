@@ -47,7 +47,7 @@ export function SiteFooter() {
                 ["/pickup/new", "Request a pickup"],
                 ["/login", "Log in"],
                 ["/signup", "Sign up"],
-                ["/login?as=staff", "Staff login"],
+                ["/login?as=admin", "Administrator login"],
                 ["/login/worker", "Worker login"],
               ].map(([href, label]) => (
                 <li key={href}>
