@@ -53,10 +53,18 @@ export const workerLoginSchema = loginSchema.extend({
   staffId: z.string().trim().regex(/^[A-Za-z0-9-]{3,40}$/, "Enter your staff ID as printed on your staff card."),
 });
 
+// Administrator login: staff ID from the staff list (0800) on top of email + password.
+export const adminLoginSchema = loginSchema.extend({
+  staffId: z.string().trim().regex(/^[A-Za-z0-9-]{3,40}$/, "Enter your staff ID as printed on your staff card."),
+});
+
+export const ADMIN_LOGIN_MISMATCH = "These details don't match an administrator account.";
+
 export const WORKER_LOGIN_MISMATCH = "These details don't match a worker account of this organisation.";
 
 export type LoginInput = z.input<typeof loginSchema>;
 export type WorkerLoginInput = z.input<typeof workerLoginSchema>;
+export type AdminLoginInput = z.input<typeof adminLoginSchema>;
 export type SignUpInput = z.input<typeof signUpFields>;
 export type SignUpField = keyof SignUpInput;
 

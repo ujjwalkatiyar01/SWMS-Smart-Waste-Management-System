@@ -9,7 +9,7 @@ import { headers } from "next/headers";
 import { createClient } from "@/lib/supabase/server";
 import { ROLE_HOME, isRole } from "@/lib/roles";
 import { firstErrors } from "@/lib/validation/field-errors";
-import { INACTIVE_MESSAGE, PASSWORD_MIN, STAFF_NOT_VERIFIED, WORKER_LOGIN_MISMATCH, loginSchema, signUpSchema, workerLoginSchema,
+import { ADMIN_LOGIN_MISMATCH, adminLoginSchema, type AdminLoginInput, INACTIVE_MESSAGE, PASSWORD_MIN, STAFF_NOT_VERIFIED, WORKER_LOGIN_MISMATCH, loginSchema, signUpSchema, workerLoginSchema,
   type AuthResult, type LoginInput, type SignUpField, type SignUpInput, type WorkerLoginInput } from "./schema";
 
 const WRONG_LOGIN = "Email or password is incorrect.";
@@ -33,6 +33,30 @@ export async function login(input: LoginInput): Promise<AuthResult<keyof LoginIn
     return { ok: false, message: INACTIVE_MESSAGE };
   }
   return { ok: true, home: ROLE_HOME[me.role] };
+}
+
+// Administrator login: the password proves who it is; the account must be an admin whose staff ID matches.
+export async function adminLogin(input: AdminLoginInput): Promise<AuthResult<keyof AdminLoginInput>> {
+  const parsed = adminLoginSchema.safeParse(input);
+  if (!parsed.success) return { ok: false, fieldErrors: firstErrors(parsed.error) };
+  const { email, password, staffId } = parsed.data;
+
+  const supabase = await createClient();
+  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+  if (error || !data.user) {
+    if (error?.status === 429) return { ok: false, message: TOO_MANY };
+    return { ok: false, message: error?.code === "invalid_credentials" || error?.status === 400 ? WRONG_LOGIN : UNEXPECTED };
+  }
+  const { data: me } = await supabase.from("users").select("role, active, staff_id").eq("id", data.user.id).maybeSingle();
+  if (!me?.active) {
+    await supabase.auth.signOut();
+    return { ok: false, message: INACTIVE_MESSAGE };
+  }
+  if (me.role !== "admin" || (me.staff_id ?? "").toUpperCase() !== staffId.toUpperCase()) {
+    await supabase.auth.signOut();
+    return { ok: false, message: ADMIN_LOGIN_MISMATCH };
+  }
+  return { ok: true, home: ROLE_HOME.admin };
 }
 
 // Worker login: the password proves who it is; organisation and staff ID must match the profile; the
