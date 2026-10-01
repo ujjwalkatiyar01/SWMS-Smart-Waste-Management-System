@@ -1035,3 +1035,9 @@ Per organisation — **City Ward A** (first) and **Green Residency Society** (fi
 **Team decisions (AI, 2026-09-30) 🧠:** waste categories wet, dry, biomedical, hazardous, e-waste, mixed / uncertain · rewards = points for verified reports, badges, no cash · escalation admin → supervisor → higher authority · Gemini free tier with a switchable adapter, demo photos only.
 
 **Considered, not added:** priority levels (deadline per issue type already sets urgency) · pickup slot capacity per day · automatic face/number-plate blurring · admin approval of new residents.
+
+## 13. Demo QR walkthrough — user request, 2026-10-01 🆕
+
+Admin opens `/admin/setup/qr` and uploads a QR image. The browser decodes the image locally; it is not stored or sent to the server. A labelled demo QR for Worker, Waste collector or Driver opens its corresponding read-only walkthrough. A printed code from the admin's own QR sheet is matched only against the active locations and vehicles already returned to that admin: bin/spot → report-location selection; disposal site → the documented scan plus GPS/geofence decision; vehicle → driver-only trip start, From/To areas, and phone GPS updates. An unknown code, including a code from another organisation, shows “not recognised” and opens no workflow. The walkthrough states what a real scan would process and what has not been implemented; it does not perform the real action. Existing resident, worker and driver scans continue through their existing role-checked actions.
+
+The three generated role demo QR images point to the public, read-only `/demo/qr?demo=…` page, so a worker or collector can open the walkthrough with a phone camera without needing an administrator account. Real location and vehicle tokens are never put in that public URL.

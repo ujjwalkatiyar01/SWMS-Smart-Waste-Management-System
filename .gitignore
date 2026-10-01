@@ -29,3 +29,6 @@ node_modules/
 
 # Local instruction audit and deletion-proposal record
 /instructions.md
+
+# Presentation deck (local only until the team decides to publish it)
+PRESENTATION/

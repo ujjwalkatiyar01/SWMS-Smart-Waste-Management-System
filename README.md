@@ -6,6 +6,39 @@
 
 ---
 
+## Try the live demo
+
+**Website:** **https://swms-smart-waste.vercel.app**
+
+Two sample organisations are set up with staff accounts so you can see how the app works from each side. Everything in them is **sample data** and may be reset at any time.
+
+### Staff demo accounts
+
+**Password for every account below:** `ujjwal@123@`
+
+| Organisation | Role | Login email | Staff ID |
+|---|---|---|---|
+| City Ward A | Administrator | `admin@citywarda.demo` | `CWA-ADM-001` |
+| City Ward A | Worker — driver | `worker1@citywarda.demo` | `CWA-DRV-001` |
+| City Ward A | Worker — waste collector | `worker2@citywarda.demo` | `CWA-COL-001` |
+| Green Residency Society | Administrator | `admin@greenresidency.demo` | `GRS-ADM-001` |
+| Green Residency Society | Worker — driver | `worker1@greenresidency.demo` | `GRS-DRV-001` |
+| Green Residency Society | Worker — waste collector | `worker2@greenresidency.demo` | `GRS-COL-001` |
+
+### How to log in
+
+1. Open the website and choose **Log in**, then pick **who you are**.
+2. **Administrator** — enter the **Staff ID**, **login email** and **password**. You land on the admin dashboard (cases, map, duty roster, vehicle trips, analytics, setup).
+3. **Worker** — choose the **organisation** and the **block / area you are working in today**, then enter the **Staff ID**, **login email** and **password**. You land on today's work (duties, tasks, live vehicles; drivers can start a trip).
+
+### Residents — use your own email
+
+There is **no shared resident account**. To try the resident side, choose **Sign up → Resident**, register with **your own real email address (for example your Gmail)**, pick an organisation and home area, then report an issue or request a pickup and follow it to the end.
+
+> Please do not enter real addresses, phone numbers or photos of people — this is a demo.
+
+---
+
 ## 1. The problem
 
 Cities, colleges, residential societies and public places produce a lot of waste every day, and collection is managed by hand. This leads to:

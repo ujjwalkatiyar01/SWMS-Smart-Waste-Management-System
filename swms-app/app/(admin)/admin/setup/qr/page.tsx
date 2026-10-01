@@ -1,11 +1,13 @@
 import Link from "next/link";
 import QRCode from "qrcode";
 import { getStaffContext } from "@/features/staff/server";
-import { PrintButton } from "@/features/setup";
+import { DemoQrPanel, PrintButton } from "@/features/setup";
 
 export const metadata = { title: "Print QR codes — SWMS" };
 
-export default async function QrSheetPage() {
+export default async function QrSheetPage({ searchParams }: { searchParams: Promise<{ demo?: string }> }) {
+  const { demo } = await searchParams;
+  const initialDemo = demo === "worker" || demo === "collector" || demo === "driver" ? demo : null;
   const { db } = await getStaffContext(["admin"]);
   const [places, vehicles] = await Promise.all([db.rpc("get_qr_sheet"), db.rpc("get_vehicle_qr_sheet")]);
   if (places.error || vehicles.error) throw new Error("Could not load QR codes");
@@ -19,6 +21,7 @@ export default async function QrSheetPage() {
     </div>
     <h1 className="mt-5 text-3xl font-extrabold text-leaf-950 print:mt-0">Location QR sheet</h1>
     <p className="mt-2 text-sm text-leaf-950/70 print:hidden">Attach each label only to the named place. A new code invalidates the previous printout.</p>
+    <DemoQrPanel places={places.data} vehicles={vehicles.data} initialDemo={initialDemo} />
     <ul className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 print:grid-cols-3">
       {items.map((place) => <li key={place.id} className="break-inside-avoid rounded-2xl border border-leaf-300 bg-white p-4 text-center">
         {/* Data URL is generated locally from a random database token, not an external image. */}

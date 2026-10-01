@@ -16,7 +16,7 @@ function km(m: number) {
 export function TripHistory({ trips, selected, route }: { trips: TripHistoryRow[]; selected: string | null; route: [number, number][] }) {
   const current = trips.find((t) => t.tripId === selected);
   return (
-    <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-4 py-8 sm:px-6">
+    <div className="mx-auto flex w-full max-w-6xl flex-col gap-8">
       <header>
         <Link href="/admin" className="inline-flex min-h-11 items-center gap-2 font-semibold text-leaf-800"><ArrowLeft className="size-4" aria-hidden /> Dashboard</Link>
         <p className="eyebrow mt-3 text-leaf-600">Admin</p>

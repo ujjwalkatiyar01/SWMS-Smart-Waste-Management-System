@@ -31,7 +31,7 @@ const deadlines = [
 export function SetupPage({ data }: { data: Data }) {
   const org = data.org;
   const hours = org.deadline_hours_json as Record<string, number>;
-  return <div className="mx-auto flex w-full max-w-6xl flex-col gap-9 px-4 py-8 sm:px-6">
+  return <div className="mx-auto flex w-full max-w-6xl flex-col gap-9">
     <header>
       <Link href="/admin" className="inline-flex min-h-11 items-center gap-2 font-semibold text-leaf-800"><ArrowLeft className="size-4" aria-hidden /> Dashboard</Link>
       <p className="eyebrow mt-3 text-leaf-600">Admin</p>

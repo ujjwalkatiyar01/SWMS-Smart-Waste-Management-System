@@ -96,6 +96,12 @@
   --animate-orbit: turn 240s linear infinite;
   --animate-enter: enter 380ms var(--ease-out-soft) both;
   --animate-sheen: sheen 9s var(--ease-out-soft) infinite;
+  --animate-bar-in: bar-in 600ms var(--ease-out-soft) both; /* analytics bars grow from the start */
+
+  @keyframes bar-in {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
 
   @keyframes rise {
     from { opacity: 0; transform: translateY(18px); }

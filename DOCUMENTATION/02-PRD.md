@@ -242,3 +242,7 @@ Residents and workers can ask natural-language questions about using the app and
 ### Earlier open items
 - Creation of hosting, storage and email accounts (development). Tech stack approved 2026-09-30.
 - Awareness content in English and Hindi with official sources (project team).
+
+### Demo QR walkthrough — user request, 2026-10-01 🆕
+
+On the admin QR page, an administrator can upload a QR image and see the corresponding demo walkthrough for a worker, waste collector, driver, registered bin/spot, vehicle, or disposal site. The page also provides labelled sample QR images for the worker, collector and driver walkthroughs. Demo scans are read-only: they explain the documented steps and never sign in a user, start a trip, complete a duty, submit a report or change database records. Existing operational QR codes retain their current role and organisation checks; an unknown or other-organisation code opens no workflow. The disposal-site result is presented as the documented flow until its app action is implemented. Acceptance: image upload and sample scans work on desktop and phone widths, the matching steps appear, invalid images and unrecognised codes get a clear message, and no action runs from the demo.

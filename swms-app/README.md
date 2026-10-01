@@ -91,3 +91,7 @@ npm run test:e2e         # Playwright, needs the app running and the sample logi
 The animated bin opens a chat from the public home page (right side) and signed-in app pages (left side). Public help is grounded in user-facing workflow guidance. Signed-in residents can ask about their own recent reports and pickups; workers can ask about assigned ones. The bot reads through their session and cannot change records. Add the existing server-only `GEMINI_API_KEY` from `.env.example` to `.env.local` for model-written replies; without it, documented help and status summaries still work. `20261001001200_bot_runs.sql` enables quota-reserved model calls after it is applied. No key is currently configured locally, and live Gemini answers have not been verified.
 
 The launcher is a transparent animated mascot fixed at the bottom, with a small “Ask” label underneath. The question field stays at the bottom of the open chat.
+
+### Demo QR walkthrough 🆕 (2026-10-01)
+
+Admin Setup → QR codes includes a read-only demo area. Upload a PNG, JPEG or WebP QR image to preview the matching worker, waste collector, driver, bin/spot, disposal-site or vehicle process. The image is decoded in the browser and not stored. The page also supplies three downloadable role-demo QRs; scanning one with a phone opens the public `/demo/qr` walkthrough. Unknown and other-organisation codes are rejected. Demo scans never sign in a user or change app data; the printed operational QRs keep their existing checks. Disposal-site verification is documented but not yet implemented as an app action.

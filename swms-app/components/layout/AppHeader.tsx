@@ -1,14 +1,11 @@
 // Header for every logged-in screen: logo to the role home, who is logged in, and log out.
 
-import { UserRound } from "lucide-react";
 import { DemoLabel } from "@/components/shared/DemoLabel";
 import { Logo } from "@/components/shared/Logo";
-import { logout } from "@/features/auth";
-import { NotificationBell } from "@/features/notifications";
 import type { NotificationItem } from "@/features/notifications/schema";
-import { firstName, type CurrentUser } from "@/lib/auth/session";
-import { ROLE_HOME, roleLabel } from "@/lib/roles";
-import { LogoutButton } from "./LogoutButton";
+import type { CurrentUser } from "@/lib/auth/session";
+import { ROLE_HOME } from "@/lib/roles";
+import { UserMenu } from "./UserMenu";
 
 export function AppHeader({ user, notifications }: { user: CurrentUser; notifications: NotificationItem[] }) {
   return (
@@ -24,17 +21,7 @@ export function AppHeader({ user, notifications }: { user: CurrentUser; notifica
           <Logo href={ROLE_HOME[user.role]} className="w-[104px] lg:w-[128px]" />
           <DemoLabel className="hidden sm:inline-flex" />
         </div>
-        <div className="flex items-center gap-1 sm:gap-3">
-          <NotificationBell items={notifications} />
-          <p className="flex items-center gap-2 text-sm">
-            <UserRound className="hidden size-4 text-leaf-700 sm:block" aria-hidden />
-            <span className="font-semibold text-leaf-950">{firstName(user.name)}</span>
-            <span className="rounded-full bg-leaf-100 px-2 py-0.5 text-xs font-semibold text-leaf-800">{roleLabel(user.role, user.workerType)}</span>
-          </p>
-          <form action={logout}>
-            <LogoutButton />
-          </form>
-        </div>
+        <UserMenu user={user} notifications={notifications} />
       </div>
     </header>
   );

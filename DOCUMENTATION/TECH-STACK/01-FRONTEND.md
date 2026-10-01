@@ -231,3 +231,9 @@ Launcher refinement 🆕 (2026-10-01): the owner requested a transparent clickab
 ### Staff sign-up and live vehicles — continued
 
 New `features/trips/` (`DriverTrip`, `LiveVehicles` with a client-only Leaflet `VehicleMap`, polling every 15 s while visible). `QrScanner` moved to `components/shared/` (used by the report form and the driver's vehicle scan). `features/auth/widgets/ChoiceCards.tsx` for "Who are you?" and "Type of work". Pages: `/worker` (driver trip + live map), `/my` and `/admin/map` (live vehicles), `/admin/setup#staff-ids`, vehicle codes on `/admin/setup/qr`. Login page has a Resident / Staff switch (`/login?as=staff`, also in the footer).
+
+### Demo QR walkthrough 🆕 (2026-10-01)
+
+`/admin/setup/qr` adds a screen-only demo section alongside the existing printable sheet. It generates labelled Worker, Waste collector and Driver demo QR images and accepts an uploaded PNG, JPEG or WebP QR image. `@zxing/browser` decodes the image locally. The decoded value is matched against only the demo URLs for this site or the active location/vehicle codes already returned by the admin-only sheet functions. It shows the matching documented sequence and never calls a write action, follows an arbitrary URL, uploads the image, or treats a QR as staff authentication. Unknown and cross-organisation codes show a clear failure state. The existing printable codes and operational scanner flows are unchanged.
+
+The generated role QR images encode `/demo/qr?demo=worker|collector|driver`, a public read-only page that shows the same walkthrough on a phone. Only the admin sheet handles operational location and vehicle tokens; the public route never receives those tokens.
