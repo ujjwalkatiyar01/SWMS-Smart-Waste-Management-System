@@ -38,3 +38,21 @@ export function hoursOverdue(dueIso: string, now = Date.now()) {
   const diff = now - new Date(dueIso).getTime();
   return diff > 0 ? Math.max(1, Math.round(diff / 36e5)) : 0;
 }
+
+const isoDay = new Intl.DateTimeFormat("en-CA", { timeZone: ORG_TIME_ZONE, year: "numeric", month: "2-digit", day: "2-digit" });
+const clock = new Intl.DateTimeFormat("en-GB", { timeZone: ORG_TIME_ZONE, hour: "2-digit", minute: "2-digit", hourCycle: "h23" });
+
+/** The organisation's local date as YYYY-MM-DD, `offset` days from today. */
+export function orgDay(offset = 0, now = Date.now()) {
+  return isoDay.format(new Date(now + offset * 864e5));
+}
+
+/** The organisation's local time as HH:MM. */
+export function orgClock(now = Date.now()) {
+  return clock.format(new Date(now));
+}
+
+/** "Mon 6 Oct" for a YYYY-MM-DD date without shifting it by time zone. */
+export function formatDay(day: string) {
+  return formatDate(`${day}T12:00:00+05:30`);
+}
