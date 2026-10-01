@@ -9,6 +9,7 @@ import { Building2, HardHat, IdCard, Mail, MapPin } from "lucide-react";
 import { workerLogin } from "../actions";
 import type { SignUpOptions } from "../schema";
 import { FormAlert, PasswordField, SelectField, TextField } from "./fields";
+import { LoginRoleSwitch } from "./LoginRoleSwitch";
 import { SubmitButton } from "./SubmitButton";
 import { useAuthForm } from "./useAuthForm";
 
@@ -32,6 +33,8 @@ export function WorkerLoginForm({ options }: { options: SignUpOptions }) {
         Worker <span className="accent-serif text-leaf-700">login</span>
       </h1>
       <p className="mt-1.5 text-ui text-leaf-950/80">Tell us where you are working today. Your admin plans duties by area.</p>
+
+      <LoginRoleSwitch active="worker" />
 
       <form {...formProps} className="mt-6 flex flex-col gap-4">
         <div className="grid gap-4 sm:grid-cols-2">
@@ -59,9 +62,6 @@ export function WorkerLoginForm({ options }: { options: SignUpOptions }) {
       <p className="mt-5 text-center text-ui text-leaf-950/80">
         New worker?{" "}
         <Link href="/signup" className="font-semibold text-leaf-800 underline-offset-4 hover:underline">Create your account with your staff ID</Link>
-      </p>
-      <p className="mt-2 text-center text-sm text-leaf-950/70">
-        Admin or supervisor? <Link href="/login?as=staff" className="font-semibold text-leaf-800 underline-offset-4 hover:underline">Staff login</Link>
       </p>
     </div>
   );

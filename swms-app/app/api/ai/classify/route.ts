@@ -34,7 +34,8 @@ export async function POST(request: Request) {
     quotaError.message === "AI limit reached" ? "AI limit reached for today. Choose a category manually." : "AI suggestion is unavailable. Choose a category manually.");
   const started = Date.now();
   try {
-    const result = await classifyWastePhoto(jpeg, { timeoutMs: 8000 });
+    // Gemini refuses a request deadline under 10 s ("Minimum allowed deadline is 10s").
+    const result = await classifyWastePhoto(jpeg, { timeoutMs: 10_000 });
     const { error: saveError } = await admin.from("ai_runs").update({ output_json: result, category: result.category,
       confidence: result.confidence, error: null, latency_ms: Date.now() - started }).eq("id", runId);
     if (saveError) return fail(503, "AI suggestion is unavailable. Choose a category manually.");
