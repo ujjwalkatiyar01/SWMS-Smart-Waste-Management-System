@@ -62,8 +62,9 @@ export async function returnTask(input: ReturnInput): Promise<ActionOutcome> {
     return { ok: false, message: toUserMessage(error.message) };
   }
 
+  // The case page is not revalidated here: the worker no longer has access, and refreshing it inside this
+  // response would replace the confirmation with "Case not found". Others load it fresh (dynamic page).
   revalidatePath("/worker");
   revalidatePath("/admin");
-  revalidatePath(`/case/${parsed.data.reportId}`);
   return { ok: true };
 }
