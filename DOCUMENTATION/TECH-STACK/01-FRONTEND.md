@@ -226,6 +226,8 @@ Built beyond the earlier checkpoint, all using the existing tokens and shared la
 
 The requested animated bin mascot is reused as a small labelled chat launcher. It is fixed on the homepage right and on signed-in resident/worker screens left, clear of the main page controls at phone width. The chat has a visible heading, close button, message log, labelled text field, loading and failure states, keyboard focus, and reduced-motion support from the existing CSS. It follows the home's leaf/cream palette and Plus Jakarta Sans typography. Bot answers include links to the relevant app screen when available.
 
+Launcher refinement 🆕 (2026-10-01): the owner requested a transparent clickable mascot at the bottom, with only “Ask” below it. The long “Ask SWMS bot” launcher text is removed; the open chat retains its SWMS bot heading and bottom question field. The homepage launcher stays on the right and signed-in app launcher on the left.
+
 ### Staff sign-up and live vehicles — continued
 
 New `features/trips/` (`DriverTrip`, `LiveVehicles` with a client-only Leaflet `VehicleMap`, polling every 15 s while visible). `QrScanner` moved to `components/shared/` (used by the report form and the driver's vehicle scan). `features/auth/widgets/ChoiceCards.tsx` for "Who are you?" and "Type of work". Pages: `/worker` (driver trip + live map), `/my` and `/admin/map` (live vehicles), `/admin/setup#staff-ids`, vehicle codes on `/admin/setup/qr`. Login page has a Resident / Staff switch (`/login?as=staff`, also in the footer).
