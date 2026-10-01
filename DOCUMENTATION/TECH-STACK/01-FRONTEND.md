@@ -219,3 +219,13 @@ Built beyond the earlier checkpoint, all using the existing tokens and shared la
 - `/my` now also shows the next routine collection for the resident's area, points and badges (10 / 30 / 50 verified reports), the opt-in area leaderboard (first name and points only) and "Cases I follow" (summary only).
 - New shared piece: `components/shared/ReasonForm` (one required text field plus extra controls, pending state, plain errors, refresh on success). `StatCard` accepts an optional link.
 - Still not built from §3: `/worker/trip`, `/admin/trips`, `/admin/flags`, `/admin/audit`. Not verified: the real invite email (Supabase built-in email only reaches team addresses) and a real phone (camera, GPS, QR scan).
+
+### Implementation checkpoint 🆕 (2026-10-01, staff sign-up and live vehicles)
+
+### F14 SWMS bot launcher 🆕 (2026-10-01)
+
+The requested animated bin mascot is reused as a small labelled chat launcher. It is fixed on the homepage right and on signed-in resident/worker screens left, clear of the main page controls at phone width. The chat has a visible heading, close button, message log, labelled text field, loading and failure states, keyboard focus, and reduced-motion support from the existing CSS. It follows the home's leaf/cream palette and Plus Jakarta Sans typography. Bot answers include links to the relevant app screen when available.
+
+### Staff sign-up and live vehicles — continued
+
+New `features/trips/` (`DriverTrip`, `LiveVehicles` with a client-only Leaflet `VehicleMap`, polling every 15 s while visible). `QrScanner` moved to `components/shared/` (used by the report form and the driver's vehicle scan). `features/auth/widgets/ChoiceCards.tsx` for "Who are you?" and "Type of work". Pages: `/worker` (driver trip + live map), `/my` and `/admin/map` (live vehicles), `/admin/setup#staff-ids`, vehicle codes on `/admin/setup/qr`. Login page has a Resident / Staff switch (`/login?as=staff`, also in the footer).
