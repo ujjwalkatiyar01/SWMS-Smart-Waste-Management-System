@@ -2,7 +2,7 @@
 // predicted hotspots, area overview, per-worker progress, pickups and recent reports.
 
 import Link from "next/link";
-import { Flag, Map as MapIcon, ListFilter, Settings } from "lucide-react";
+import { CalendarClock, Flag, Map as MapIcon, ListFilter, Route, Settings } from "lucide-react";
 import { StatusBadge } from "@/components/shared/StatusBadge";
 import { EmptyState, ProgressTable, ServiceMeasures, StatCard, StatGrid } from "@/features/staff";
 import { CaseList } from "../widgets/CaseList";
@@ -23,6 +23,8 @@ export function AdminDashboard({ data }: { data: Dashboard }) {
           {[
             { href: "/admin/cases", label: "All cases", icon: ListFilter },
             { href: "/admin/map", label: "Map", icon: MapIcon },
+            { href: "/admin/duties", label: "Duty roster", icon: CalendarClock },
+            { href: "/admin/trips", label: "Vehicle trips", icon: Route },
             { href: "/admin/setup", label: "Setup", icon: Settings },
           ].map(({ href, label, icon: Icon }) => (
             <Link

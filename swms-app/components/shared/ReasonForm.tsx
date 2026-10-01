@@ -3,6 +3,7 @@
 // A short form with one required text field and a button, for actions that need a reason
 // (reject, close, return, reopen, instruction, delay note). Extra controls go in `children`.
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useId, useState, type FormEvent, type ReactNode } from "react";
 import { CheckCircle2, Loader2 } from "lucide-react";
@@ -16,6 +17,7 @@ export function ReasonForm({
   doneMessage,
   tone = "primary",
   onSubmit,
+  doneLink,
   children,
 }: {
   label: string;
@@ -24,6 +26,8 @@ export function ReasonForm({
   doneMessage: string;
   tone?: "primary" | "danger";
   onSubmit: (reason: string, extra: FormData) => Promise<ActionOutcome>;
+  /** When the action removes the viewer's access to this page: show this link instead of refreshing into "not found". */
+  doneLink?: { href: string; label: string };
   children?: ReactNode;
 }) {
   const router = useRouter();
@@ -44,7 +48,7 @@ export function ReasonForm({
       if (result.ok) {
         setDone(true);
         setReason("");
-        router.refresh();
+        if (!doneLink) router.refresh();
       } else {
         setError(result.message);
       }
@@ -57,9 +61,16 @@ export function ReasonForm({
 
   if (done) {
     return (
-      <p role="status" className="flex items-center gap-2 text-ui font-semibold text-success">
-        <CheckCircle2 className="size-5" aria-hidden /> {doneMessage}
-      </p>
+      <div className="flex flex-col gap-2">
+        <p role="status" className="flex items-center gap-2 text-ui font-semibold text-success">
+          <CheckCircle2 className="size-5" aria-hidden /> {doneMessage}
+        </p>
+        {doneLink && (
+          <Link href={doneLink.href} className="inline-flex min-h-11 items-center self-start font-semibold text-leaf-800 underline underline-offset-4">
+            {doneLink.label}
+          </Link>
+        )}
+      </div>
     );
   }
 

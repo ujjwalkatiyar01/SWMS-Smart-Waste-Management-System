@@ -167,4 +167,12 @@ Pickup changes use server actions backed by the eight database functions in the 
 
 ### Implementation checkpoint 🆕 (2026-10-01, case lifecycle, exports, staff)
 
+### F14 SWMS bot read contract 🆕 (2026-10-01)
+
+`POST /api/bot` accepts a bounded text question and short conversation history. It derives identity from the verified session, reads only user-facing guidance and RLS-filtered current rows through the session-scoped client, and returns text plus fixed app links. It never executes a write suggested by a user or model. An authenticated Gemini call is optional and quota-reserved; unavailable model or quota returns grounded guidance and current record summaries. The public homepage gets guidance only. Do not send raw private notes, photos, names, emails, phone numbers, or credentials to the provider.
+
+Privacy clarification 🆕: current row summaries are answered locally and are never included in a Gemini request. The worker read also covers assigned duties and own trips when those tables are available. The server sends only general guidance questions to Gemini, with the UI warning against entering personal details.
+
+### Case lifecycle, exports and staff — continued
+
 Server actions now exist for every case change in §5 "Case lifecycle" except `set_waste_category`: reject, close, correct type (`features/admin/actions.ts`), return (`features/worker/actions.ts`), delay note (`features/staff/actions.ts`), instruction (`features/escalations/actions.ts`), reopen, add evidence and follow (`features/reports/actions.ts`). Each parses input with zod, calls the database function as the user, and maps the database message through `toUserMessage`. `POST /api/photos` also accepts `kind=evidence` for the reporter, or a follower while the case is open; a failed save removes the uploaded file. Prevention reviews are admin writes under row rules. `GET /api/export` (admin only) builds reports or pickups as CSV with formula-cell escaping (`lib/csv.ts`, unit-tested), days in the organisation's time zone, no resident names or contact details. Staff invites use the admin client (use 4 in §3): `inviteUserByEmail`, then the role is set. `next.config.ts` sets `logging.serverFunctions: false`, because the development log otherwise prints every server-action argument, including passwords. Node 22 or newer is required for the Supabase client outside the browser (see `.nvmrc`).

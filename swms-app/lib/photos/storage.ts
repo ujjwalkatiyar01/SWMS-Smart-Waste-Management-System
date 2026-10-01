@@ -22,6 +22,11 @@ export function pickupPhotoPath(orgId: string, pickupId: string) {
   return `${orgId}/pickups/${pickupId}/evidence.jpg`;
 }
 
+/** After-photo of a worker duty (1100): `<org_id>/duties/<duty_id>/after.jpg`. */
+export function dutyPhotoPath(orgId: string, dutyId: string) {
+  return `${orgId}/duties/${dutyId}/after.jpg`;
+}
+
 export async function uploadPhoto(path: string, jpeg: Uint8Array) {
   const { error } = await createAdminClient().storage.from(BUCKET).upload(path, jpeg, {
     contentType: "image/jpeg",

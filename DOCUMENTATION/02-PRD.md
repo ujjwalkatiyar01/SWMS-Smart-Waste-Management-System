@@ -234,5 +234,11 @@ Acceptance checks pass on a phone and a laptop, seed data demonstrates it, org i
 - 🧠 AI features: categories wet, dry, biomedical, hazardous, e-waste, mixed / uncertain; rewards = points for verified reports, badges, no cash; escalation admin → supervisor → higher authority; Gemini free tier via a switchable adapter, demo photos only.
 
 ## 13. Still open
+
+### F14. SWMS bot — user request, 2026-10-01 🆕
+
+Residents and workers can ask natural-language questions about using the app and their own current work. A small animated SWMS bin opens a chat: right side on the public homepage, left side on signed-in app screens. The public bot explains user-facing workflows and links to relevant pages. Signed-in answers may use current reports and pickups for the resident, or assigned cases and pickups for the worker, after the server enforces the existing session, role and organisation rules. The bot is read-only: it never changes a case, schedules a pickup, or treats an AI answer as official proof. It says when information is unavailable and links to the actual record. Project documentation supplies approved workflow guidance, not private instruction files or secrets. The bot keeps a usable documented-help fallback if the model key or quota is unavailable. Acceptance: keyboard and phone use work, public users cannot see private data, one organisation cannot learn about another, and a worker sees only assigned records. This new explicit request expands the earlier A1-only model scope; the original wording remains as history.
+
+### Earlier open items
 - Creation of hosting, storage and email accounts (development). Tech stack approved 2026-09-30.
 - Awareness content in English and Hindi with official sources (project team).
