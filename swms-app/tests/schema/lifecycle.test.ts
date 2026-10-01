@@ -270,7 +270,8 @@ describe("add_delay_note", () => {
     await as(db, people.admin, () => db.query(`select public.add_delay_note($1, 'Heavy rain', 'Extra team tomorrow')`, [c.id]));
     await as(db, people.worker, () => db.query(`select public.add_delay_note($1, 'Truck broke down', 'Repair then collect')`, [c.id]));
     const notes = (await db.query<{ data: { next_step: string } }>(`select data from public.report_events where report_id = $1 and type = 'delay_note' order by created_at, id`, [c.id])).rows;
-    expect(notes.map((n) => n.data.next_step)).toEqual(["Extra team tomorrow", "Repair then collect"]);
+    // Both notes can share one timestamp, so compare without relying on order.
+    expect(notes.map((n) => n.data.next_step).sort()).toEqual(["Extra team tomorrow", "Repair then collect"]);
   });
 
   it("refuses other workers, residents and missing details, and leaves the due time alone", async () => {

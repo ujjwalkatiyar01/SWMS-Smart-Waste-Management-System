@@ -66,13 +66,13 @@ beforeAll(async () => {
 }, 60_000);
 
 describe("structure", () => {
-  it("has 22 tables, all with RLS enabled", async () => {
+  it("has 26 tables (22 from 06 + staff_roster 0800 + worker_checkins, worker_duties, trip_points 1100), all with RLS enabled", async () => {
     const r = await one<{ total: number; rls: number }>(
       `select count(*)::int total, count(*) filter (where c.relrowsecurity)::int rls
        from pg_class c join pg_namespace n on n.oid = c.relnamespace
        where n.nspname = 'public' and c.relkind = 'r'`,
     );
-    expect(r).toEqual({ total: 22, rls: 22 });
+    expect(r).toEqual({ total: 26, rls: 26 });
   });
 
   it("seeds 2 organisations, each with 8 bins/spots and 1 disposal site", async () => {
