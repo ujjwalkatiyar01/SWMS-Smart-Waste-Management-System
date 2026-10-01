@@ -544,6 +544,37 @@ isOneToOne: false
       referencedColumns: ["id"]
     }
                   ]
+                },"staff_roster": {
+                  Row: {
+                    "added_by": string | null,"claimed_at": string | null,"claimed_by": string | null,"created_at": string,"email": string,"id": string,"org_id": string,"role": string,"staff_id": string,"worker_type": string | null
+                  }
+                  Insert: {
+                    "added_by"?: string | null,"claimed_at"?: string | null,"claimed_by"?: string | null,"created_at"?: string,"email": string,"id"?: string,"org_id": string,"role": string,"staff_id": string,"worker_type"?: string | null
+                  }
+                  Update: {
+                    "added_by"?: string | null,"claimed_at"?: string | null,"claimed_by"?: string | null,"created_at"?: string,"email"?: string,"id"?: string,"org_id"?: string,"role"?: string,"staff_id"?: string,"worker_type"?: string | null
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "staff_roster_added_by_fkey"
+      columns: ["added_by"]
+isOneToOne: false
+      referencedRelation: "users"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "staff_roster_claimed_by_fkey"
+      columns: ["claimed_by"]
+isOneToOne: false
+      referencedRelation: "users"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "staff_roster_org_id_fkey"
+      columns: ["org_id"]
+isOneToOne: false
+      referencedRelation: "organizations"
+      referencedColumns: ["id"]
+    }
+                  ]
                 },"trip_events": {
                   Row: {
                     "accuracy_m": number | null,"created_at": string,"driver_id": string,"id": string,"lat": number | null,"lng": number | null,"org_id": string,"photo_url": string | null,"scan_method": string | null,"stop_id": string | null,"trip_id": string,"type": string
@@ -579,6 +610,31 @@ isOneToOne: false
 isOneToOne: false
       referencedRelation: "vehicle_trips"
       referencedColumns: ["id"]
+    }
+                  ]
+                },"trip_points": {
+                  Row: {
+                    "accuracy_m": number | null,"id": string,"lat": number,"lng": number,"org_id": string,"recorded_at": string,"trip_id": string
+                  }
+                  Insert: {
+                    "accuracy_m"?: number | null,"id"?: string,"lat": number,"lng": number,"org_id": string,"recorded_at"?: string,"trip_id": string
+                  }
+                  Update: {
+                    "accuracy_m"?: number | null,"id"?: string,"lat"?: number,"lng"?: number,"org_id"?: string,"recorded_at"?: string,"trip_id"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "trip_points_org_id_fkey"
+      columns: ["org_id"]
+isOneToOne: false
+      referencedRelation: "organizations"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "trip_points_trip_id_org_id_fkey"
+      columns: ["trip_id","org_id"]
+isOneToOne: false
+      referencedRelation: "vehicle_trips"
+      referencedColumns: ["id","org_id"]
     }
                   ]
                 },"trip_stops": {
@@ -638,13 +694,13 @@ isOneToOne: false
                   ]
                 },"users": {
                   Row: {
-                    "active": boolean,"area_id": string | null,"created_at": string,"email": string,"id": string,"name": string,"org_id": string,"phone": string | null,"role": string,"show_on_leaderboard": boolean
+                    "active": boolean,"area_id": string | null,"created_at": string,"email": string,"id": string,"name": string,"org_id": string,"phone": string | null,"role": string,"show_on_leaderboard": boolean,"staff_id": string | null,"worker_type": string | null
                   }
                   Insert: {
-                    "active"?: boolean,"area_id"?: string | null,"created_at"?: string,"email": string,"id": string,"name": string,"org_id": string,"phone"?: string | null,"role"?: string,"show_on_leaderboard"?: boolean
+                    "active"?: boolean,"area_id"?: string | null,"created_at"?: string,"email": string,"id": string,"name": string,"org_id": string,"phone"?: string | null,"role"?: string,"show_on_leaderboard"?: boolean,"staff_id"?: string | null,"worker_type"?: string | null
                   }
                   Update: {
-                    "active"?: boolean,"area_id"?: string | null,"created_at"?: string,"email"?: string,"id"?: string,"name"?: string,"org_id"?: string,"phone"?: string | null,"role"?: string,"show_on_leaderboard"?: boolean
+                    "active"?: boolean,"area_id"?: string | null,"created_at"?: string,"email"?: string,"id"?: string,"name"?: string,"org_id"?: string,"phone"?: string | null,"role"?: string,"show_on_leaderboard"?: boolean,"staff_id"?: string | null,"worker_type"?: string | null
                   }
                   Relationships: [
                     {
@@ -669,13 +725,13 @@ isOneToOne: false
                   ]
                 },"vehicle_trips": {
                   Row: {
-                    "created_at": string,"disposal_check": string,"disposal_site_id": string | null,"driver_id": string,"ended_at": string | null,"id": string,"is_simulated": boolean,"org_id": string,"schedule_id": string | null,"started_at": string | null,"status": string,"trip_date": string,"unapproved_stop_count": number,"vehicle_id": string
+                    "created_at": string,"disposal_check": string,"disposal_site_id": string | null,"distance_m": number,"driver_id": string,"ended_at": string | null,"from_area_id": string | null,"id": string,"is_simulated": boolean,"last_accuracy_m": number | null,"last_lat": number | null,"last_lng": number | null,"last_seen_at": string | null,"org_id": string,"schedule_id": string | null,"started_at": string | null,"status": string,"to_area_id": string | null,"trip_date": string,"unapproved_stop_count": number,"vehicle_id": string
                   }
                   Insert: {
-                    "created_at"?: string,"disposal_check"?: string,"disposal_site_id"?: string | null,"driver_id": string,"ended_at"?: string | null,"id"?: string,"is_simulated"?: boolean,"org_id": string,"schedule_id"?: string | null,"started_at"?: string | null,"status"?: string,"trip_date": string,"unapproved_stop_count"?: number,"vehicle_id": string
+                    "created_at"?: string,"disposal_check"?: string,"disposal_site_id"?: string | null,"distance_m"?: number,"driver_id": string,"ended_at"?: string | null,"from_area_id"?: string | null,"id"?: string,"is_simulated"?: boolean,"last_accuracy_m"?: number | null,"last_lat"?: number | null,"last_lng"?: number | null,"last_seen_at"?: string | null,"org_id": string,"schedule_id"?: string | null,"started_at"?: string | null,"status"?: string,"to_area_id"?: string | null,"trip_date": string,"unapproved_stop_count"?: number,"vehicle_id": string
                   }
                   Update: {
-                    "created_at"?: string,"disposal_check"?: string,"disposal_site_id"?: string | null,"driver_id"?: string,"ended_at"?: string | null,"id"?: string,"is_simulated"?: boolean,"org_id"?: string,"schedule_id"?: string | null,"started_at"?: string | null,"status"?: string,"trip_date"?: string,"unapproved_stop_count"?: number,"vehicle_id"?: string
+                    "created_at"?: string,"disposal_check"?: string,"disposal_site_id"?: string | null,"distance_m"?: number,"driver_id"?: string,"ended_at"?: string | null,"from_area_id"?: string | null,"id"?: string,"is_simulated"?: boolean,"last_accuracy_m"?: number | null,"last_lat"?: number | null,"last_lng"?: number | null,"last_seen_at"?: string | null,"org_id"?: string,"schedule_id"?: string | null,"started_at"?: string | null,"status"?: string,"to_area_id"?: string | null,"trip_date"?: string,"unapproved_stop_count"?: number,"vehicle_id"?: string
                   }
                   Relationships: [
                     {
@@ -703,6 +759,12 @@ isOneToOne: false
       referencedRelation: "users"
       referencedColumns: ["id","org_id"]
     },{
+      foreignKeyName: "vehicle_trips_from_area_id_org_id_fkey"
+      columns: ["from_area_id","org_id"]
+isOneToOne: false
+      referencedRelation: "areas"
+      referencedColumns: ["id","org_id"]
+    },{
       foreignKeyName: "vehicle_trips_org_id_fkey"
       columns: ["org_id"]
 isOneToOne: false
@@ -721,6 +783,12 @@ isOneToOne: false
       referencedRelation: "collection_schedules"
       referencedColumns: ["id","org_id"]
     },{
+      foreignKeyName: "vehicle_trips_to_area_id_org_id_fkey"
+      columns: ["to_area_id","org_id"]
+isOneToOne: false
+      referencedRelation: "areas"
+      referencedColumns: ["id","org_id"]
+    },{
       foreignKeyName: "vehicle_trips_vehicle_id_fkey"
       columns: ["vehicle_id"]
 isOneToOne: false
@@ -736,13 +804,13 @@ isOneToOne: false
                   ]
                 },"vehicles": {
                   Row: {
-                    "active": boolean,"created_at": string,"default_driver_id": string | null,"id": string,"kind": string,"number": string,"org_id": string
+                    "active": boolean,"created_at": string,"default_driver_id": string | null,"id": string,"kind": string,"number": string,"org_id": string,"qr_code": string | null
                   }
                   Insert: {
-                    "active"?: boolean,"created_at"?: string,"default_driver_id"?: string | null,"id"?: string,"kind": string,"number": string,"org_id": string
+                    "active"?: boolean,"created_at"?: string,"default_driver_id"?: string | null,"id"?: string,"kind": string,"number": string,"org_id": string,"qr_code"?: string | null
                   }
                   Update: {
-                    "active"?: boolean,"created_at"?: string,"default_driver_id"?: string | null,"id"?: string,"kind"?: string,"number"?: string,"org_id"?: string
+                    "active"?: boolean,"created_at"?: string,"default_driver_id"?: string | null,"id"?: string,"kind"?: string,"number"?: string,"org_id"?: string,"qr_code"?: string | null
                   }
                   Relationships: [
                     {
@@ -765,6 +833,80 @@ isOneToOne: false
       referencedColumns: ["id"]
     }
                   ]
+                },"worker_checkins": {
+                  Row: {
+                    "area_id": string,"checked_in_at": string,"id": string,"org_id": string,"worker_id": string
+                  }
+                  Insert: {
+                    "area_id": string,"checked_in_at"?: string,"id"?: string,"org_id": string,"worker_id": string
+                  }
+                  Update: {
+                    "area_id"?: string,"checked_in_at"?: string,"id"?: string,"org_id"?: string,"worker_id"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "worker_checkins_area_id_org_id_fkey"
+      columns: ["area_id","org_id"]
+isOneToOne: false
+      referencedRelation: "areas"
+      referencedColumns: ["id","org_id"]
+    },{
+      foreignKeyName: "worker_checkins_org_id_fkey"
+      columns: ["org_id"]
+isOneToOne: false
+      referencedRelation: "organizations"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "worker_checkins_worker_id_org_id_fkey"
+      columns: ["worker_id","org_id"]
+isOneToOne: false
+      referencedRelation: "users"
+      referencedColumns: ["id","org_id"]
+    }
+                  ]
+                },"worker_duties": {
+                  Row: {
+                    "area_id": string,"created_at": string,"created_by": string | null,"done_at": string | null,"done_lat": number | null,"done_lng": number | null,"done_note": string | null,"duty_date": string,"end_time": string,"id": string,"location_id": string | null,"org_id": string,"photo_url": string | null,"start_lat": number | null,"start_lng": number | null,"start_time": string,"started_at": string | null,"status": string,"task": string,"worker_id": string
+                  }
+                  Insert: {
+                    "area_id": string,"created_at"?: string,"created_by"?: string | null,"done_at"?: string | null,"done_lat"?: number | null,"done_lng"?: number | null,"done_note"?: string | null,"duty_date": string,"end_time": string,"id"?: string,"location_id"?: string | null,"org_id": string,"photo_url"?: string | null,"start_lat"?: number | null,"start_lng"?: number | null,"start_time": string,"started_at"?: string | null,"status"?: string,"task": string,"worker_id": string
+                  }
+                  Update: {
+                    "area_id"?: string,"created_at"?: string,"created_by"?: string | null,"done_at"?: string | null,"done_lat"?: number | null,"done_lng"?: number | null,"done_note"?: string | null,"duty_date"?: string,"end_time"?: string,"id"?: string,"location_id"?: string | null,"org_id"?: string,"photo_url"?: string | null,"start_lat"?: number | null,"start_lng"?: number | null,"start_time"?: string,"started_at"?: string | null,"status"?: string,"task"?: string,"worker_id"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "worker_duties_area_id_org_id_fkey"
+      columns: ["area_id","org_id"]
+isOneToOne: false
+      referencedRelation: "areas"
+      referencedColumns: ["id","org_id"]
+    },{
+      foreignKeyName: "worker_duties_created_by_fkey"
+      columns: ["created_by"]
+isOneToOne: false
+      referencedRelation: "users"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "worker_duties_location_id_org_id_fkey"
+      columns: ["location_id","org_id"]
+isOneToOne: false
+      referencedRelation: "locations"
+      referencedColumns: ["id","org_id"]
+    },{
+      foreignKeyName: "worker_duties_org_id_fkey"
+      columns: ["org_id"]
+isOneToOne: false
+      referencedRelation: "organizations"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "worker_duties_worker_id_org_id_fkey"
+      columns: ["worker_id","org_id"]
+isOneToOne: false
+      referencedRelation: "users"
+      referencedColumns: ["id","org_id"]
+    }
+                  ]
                 }
           }
           Views: {
@@ -780,6 +922,9 @@ isOneToOne: false
 "add_instruction":
 { Args: { "p_note": string,"p_report": string }; Returns: undefined
                            },
+"add_staff_id":
+{ Args: { "p_email": string,"p_role": string,"p_staff_id": string,"p_worker_type"?: string }; Returns: string
+                           },
 "ai_quota_left":
 { Args: Record<PropertyKey, never>; Returns: {
               "org_left": number,"user_left": number
@@ -790,6 +935,9 @@ isOneToOne: false
                            },
 "authority_cases":
 { Args: Record<PropertyKey, never>; Returns: string[]
+                           },
+"cancel_duty":
+{ Args: { "p_duty": string }; Returns: undefined
                            },
 "cancel_pickup":
 { Args: { "p_pickup": string }; Returns: undefined
@@ -804,17 +952,26 @@ isOneToOne: false
               "area_name": string,"created_at": string,"due_at": string,"escalation_level": number,"event_types": Json,"issue_type": string,"location_name": string,"overdue": boolean,"report_id": string,"status": string
             }[]
                            },
+"check_in":
+{ Args: { "p_area": string }; Returns: undefined
+                           },
 "close_report":
 { Args: { "p_reason": string,"p_report": string,"p_valid": boolean }; Returns: undefined
                            },
 "collect_pickup":
 { Args: { "p_photo_url"?: string,"p_pickup": string,"p_segregation_ok": boolean }; Returns: undefined
                            },
+"complete_duty":
+{ Args: { "p_duty": string,"p_lat"?: number,"p_lng"?: number,"p_note"?: string,"p_photo": string }; Returns: undefined
+                           },
 "complete_report":
 { Args: { "p_lat": number,"p_lng": number,"p_note": string,"p_photo_url": string,"p_report": string }; Returns: undefined
                            },
 "correct_issue_type":
 { Args: { "p_report": string,"p_type": string }; Returns: undefined
+                           },
+"create_duties":
+{ Args: { "p_area": string,"p_dates": (string)[],"p_end": string,"p_location": string,"p_start": string,"p_task": string,"p_worker": string }; Returns: number
                            },
 "create_pickup":
 { Args: { "p_address": string,"p_id": string,"p_note": string,"p_preferred_date": string,"p_slot": string,"p_waste_type": string }; Returns: string
@@ -831,6 +988,9 @@ isOneToOne: false
 "edit_pickup":
 { Args: { "p_address": string,"p_note": string,"p_pickup": string,"p_preferred_date": string,"p_slot": string,"p_waste_type": string }; Returns: undefined
                            },
+"end_trip":
+{ Args: { "p_lat"?: number,"p_lng"?: number,"p_trip": string }; Returns: undefined
+                           },
 "follow_report":
 { Args: { "p_report": string }; Returns: undefined
                            },
@@ -842,6 +1002,11 @@ isOneToOne: false
               "area_name": string,"first_name": string,"points": number
             }[]
                            },
+"get_live_vehicles":
+{ Args: Record<PropertyKey, never>; Returns: {
+              "accuracy_m": number,"driver_first_name": string,"from_area": string,"is_mine": boolean,"last_seen_at": string,"lat": number,"lng": number,"started_at": string,"to_area": string,"trip_id": string,"vehicle_kind": string,"vehicle_number": string
+            }[]
+                           },
 "get_next_collection":
 { Args: Record<PropertyKey, never>; Returns: {
               "collection_date": string,"end_time": string,"start_time": string,"waste_type": string
@@ -850,6 +1015,16 @@ isOneToOne: false
 "get_qr_sheet":
 { Args: Record<PropertyKey, never>; Returns: {
               "id": string,"kind": string,"name": string,"qr_code": string
+            }[]
+                           },
+"get_trip_history":
+{ Args: { "p_days"?: number }; Returns: {
+              "distance_m": number,"driver_name": string,"ended_at": string,"from_area": string,"points": number,"started_at": string,"status": string,"to_area": string,"trip_id": string,"vehicle_number": string
+            }[]
+                           },
+"get_vehicle_qr_sheet":
+{ Args: Record<PropertyKey, never>; Returns: {
+              "id": string,"kind": string,"number": string,"qr_code": string
             }[]
                            },
 "list_areas_for_signup":
@@ -876,6 +1051,9 @@ isOneToOne: false
 "reject_report":
 { Args: { "p_reason": string,"p_report": string }; Returns: undefined
                            },
+"remove_staff_id":
+{ Args: { "p_id": string }; Returns: undefined
+                           },
 "reopen_report":
 { Args: { "p_photo"?: string,"p_reason": string,"p_report": string }; Returns: undefined
                            },
@@ -896,8 +1074,20 @@ isOneToOne: false
 "schedule_pickup":
 { Args: { "p_date": string,"p_pickup": string,"p_slot": string,"p_worker"?: string }; Returns: undefined
                            },
+"set_worker_area":
+{ Args: { "p_area": string,"p_worker": string }; Returns: undefined
+                           },
+"start_duty":
+{ Args: { "p_duty": string,"p_lat"?: number,"p_lng"?: number }; Returns: undefined
+                           },
+"start_trip":
+{ Args: { "p_accuracy_m"?: number,"p_code": string,"p_from_area": string,"p_lat"?: number,"p_lng"?: number,"p_scan_method": string,"p_to_area": string }; Returns: string
+                           },
 "submit_feedback":
 { Args: { "p_comment": string,"p_feedback": string,"p_report": string,"p_satisfaction"?: string }; Returns: undefined
+                           },
+"update_trip_position":
+{ Args: { "p_accuracy_m"?: number,"p_lat": number,"p_lng": number,"p_trip": string }; Returns: undefined
                            }
           }
           Enums: {
