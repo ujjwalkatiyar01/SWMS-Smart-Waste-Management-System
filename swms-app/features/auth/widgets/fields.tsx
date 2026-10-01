@@ -10,6 +10,8 @@ type IconType = ComponentType<{ className?: string; "aria-hidden"?: boolean }>;
 
 const control =
   "h-12 w-full rounded-2xl border border-white/60 bg-white/45 pl-11 pr-4 text-base text-leaf-950 shadow-[inset_0_1px_2px_rgba(22,52,25,0.06)] outline-none ring-1 ring-leaf-900/10 transition-[background-color,box-shadow] duration-200 placeholder:text-leaf-950/50 backdrop-blur-md hover:bg-white/60 focus:bg-white/85 focus:ring-2 focus:ring-leaf-600 focus-visible:outline-none aria-invalid:ring-2 aria-invalid:ring-danger";
+const selectControl = cn(control, "appearance-none bg-[length:18px] bg-[right_1rem_center] bg-no-repeat pr-10");
+const selectStyle = { backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232e6420' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E\")" };
 
 function FieldShell({
   id,
@@ -111,12 +113,30 @@ export function SelectField({
         name={id}
         aria-invalid={error ? true : undefined}
         aria-describedby={describedBy(id, error, hint)}
-        className={cn(control, "appearance-none bg-[length:18px] bg-[right_1rem_center] bg-no-repeat pr-10")}
-        style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232e6420' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E\")" }}
+        className={selectControl}
+        style={selectStyle}
         {...select}
       >
         {children}
       </select>
+    </FieldShell>
+  );
+}
+
+export function SelectPromptField({ id, label, icon, hint, error, onClick }: FieldProps & { id: string; onClick: () => void }) {
+  return (
+    <FieldShell id={id} label={label} icon={icon} hint={hint} error={error}>
+      <button
+        id={id}
+        name={id}
+        type="button"
+        onClick={onClick}
+        aria-describedby={describedBy(id, error, hint)}
+        className={cn(selectControl, "text-left")}
+        style={selectStyle}
+      >
+        Choose organisation first
+      </button>
     </FieldShell>
   );
 }
