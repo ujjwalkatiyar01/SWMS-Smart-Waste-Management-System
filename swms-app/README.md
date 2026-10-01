@@ -89,3 +89,5 @@ npm run test:e2e         # Playwright, needs the app running and the sample logi
 ### SWMS bot 🆕 (2026-10-01)
 
 The animated bin opens a chat from the public home page (right side) and signed-in app pages (left side). Public help is grounded in user-facing workflow guidance. Signed-in residents can ask about their own recent reports and pickups; workers can ask about assigned ones. The bot reads through their session and cannot change records. Add the existing server-only `GEMINI_API_KEY` from `.env.example` to `.env.local` for model-written replies; without it, documented help and status summaries still work. `20261001001200_bot_runs.sql` enables quota-reserved model calls after it is applied. No key is currently configured locally, and live Gemini answers have not been verified.
+
+The launcher is a transparent animated mascot fixed at the bottom, with a small “Ask” label underneath. The question field stays at the bottom of the open chat.
