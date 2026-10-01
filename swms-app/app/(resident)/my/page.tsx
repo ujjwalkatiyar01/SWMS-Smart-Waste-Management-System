@@ -5,6 +5,7 @@ import { getMyPickups, getNextCollection } from "@/features/pickups/server";
 import { MyReports } from "@/features/reports";
 import { getFollowedCases, getMyReports } from "@/features/reports/server";
 import { RewardsCard } from "@/features/rewards";
+import { getLiveVehicles, LiveVehicles } from "@/features/trips";
 import { getMyRewards } from "@/features/rewards/server";
 import { firstName, getCurrentUser } from "@/lib/auth/session";
 import { ROLE_HOME } from "@/lib/roles";
@@ -15,12 +16,13 @@ export default async function MyPage() {
   const me = await getCurrentUser();
   if (!me) redirect("/login");
   if (me.role !== "resident") redirect(ROLE_HOME[me.role]);
-  const [reports, pickups, followed, rewards, next] = await Promise.all([
+  const [reports, pickups, followed, rewards, next, vehicles] = await Promise.all([
     getMyReports(),
     getMyPickups(),
     getFollowedCases(),
     getMyRewards(),
     getNextCollection(),
+    getLiveVehicles(),
   ]);
   return (
     <MyReports
@@ -31,6 +33,7 @@ export default async function MyPage() {
       aboveLists={
         <>
           <NextCollection next={next} />
+          <LiveVehicles initial={vehicles} hint="See where your area's collection vehicle is before you bring your waste out." />
           {rewards && <RewardsCard rewards={rewards} />}
         </>
       }
