@@ -17,6 +17,7 @@ export function ReturnPanel({ reportId }: { reportId: string }) {
         submitLabel="Return task"
         doneMessage="Task returned to the admin."
         tone="danger"
+        doneLink={{ href: "/worker", label: "Back to my tasks" }}
         onSubmit={(reason) => returnTask({ reportId, reason })}
       />
     </section>

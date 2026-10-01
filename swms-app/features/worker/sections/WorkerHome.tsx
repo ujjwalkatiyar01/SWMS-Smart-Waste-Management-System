@@ -1,6 +1,7 @@
 // Worker / Driver home (02-PRD F4): today's counts, area filter, own tasks with status and due time.
 
 import Link from "next/link";
+import type { ReactNode } from "react";
 import { ChevronRight } from "lucide-react";
 import { StatusBadge } from "@/components/shared/StatusBadge";
 import { DueLabel, EmptyState, ISSUE_TYPE_LABEL, PICKUP_WASTE_LABEL, StatCard, StatGrid } from "@/features/staff";
@@ -11,12 +12,15 @@ import type { getWorkerHome } from "../server";
 
 type Home = Awaited<ReturnType<typeof getWorkerHome>>;
 
-export function WorkerHome({ data }: { data: Home }) {
+const WORKER_TYPE_LABEL = { collector: "Waste collector", driver: "Driver" } as const;
+
+/** `tracking`: the driver's trip panel and the live vehicle map, shown above the task lists. */
+export function WorkerHome({ data, tracking }: { data: Home; tracking?: ReactNode }) {
   const { counts } = data;
   return (
     <div className="mx-auto flex max-w-3xl flex-col gap-8 px-4 py-8 sm:px-6">
       <header>
-        <p className="eyebrow text-leaf-600">Worker / Driver</p>
+        <p className="eyebrow text-leaf-600">{data.workerType ? WORKER_TYPE_LABEL[data.workerType] : "Worker / Driver"}</p>
         <h1 className="mt-2 text-3xl font-extrabold tracking-tight text-leaf-950">Today, {firstName(data.name)}</h1>
       </header>
 
@@ -26,6 +30,8 @@ export function WorkerHome({ data }: { data: Home }) {
         <StatCard label="Remaining" value={counts.remaining} tone={counts.remaining ? "warning" : "plain"} />
         <StatCard label="Overdue" value={counts.overdue} tone={counts.overdue ? "danger" : "plain"} />
       </StatGrid>
+
+      {tracking}
 
       {data.areas.length > 1 && (
         <nav aria-label="Filter by area" className="flex flex-wrap gap-2">

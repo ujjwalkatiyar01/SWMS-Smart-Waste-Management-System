@@ -18,7 +18,7 @@ export async function getWorkerHome(areaParam: string | undefined) {
   // "Today" is the organisation's local day (03 §3); 36 h back always covers it.
   const since = new Date(Date.now() - 36 * 36e5).toISOString();
 
-  const [open, completedEvents, areas, pickups] = await Promise.all([
+  const [open, completedEvents, areas, pickups, profile] = await Promise.all([
     db.from("reports").select(TASK_ROW).eq("assigned_worker_id", me.id).eq("status", "assigned").order("due_at"),
     db.from("report_events").select("report_id, created_at").eq("type", "completed").eq("actor_id", me.id).gte("created_at", since),
     db.from("areas").select("id, name").eq("active", true).order("name"),
@@ -28,8 +28,9 @@ export async function getWorkerHome(areaParam: string | undefined) {
       .eq("assigned_worker_id", me.id)
       .eq("status", "scheduled")
       .order("preferred_date"),
+    db.from("users").select("area_id").eq("id", me.id).single(),
   ]);
-  if (open.error || completedEvents.error || areas.error || pickups.error) throw new Error("Worker home read failed");
+  if (open.error || completedEvents.error || areas.error || pickups.error || profile.error) throw new Error("Worker home read failed");
 
   const today = localDay.format(new Date());
   const doneIds = [
@@ -55,6 +56,9 @@ export async function getWorkerHome(areaParam: string | undefined) {
 
   return {
     name: me.name,
+    workerType: me.workerType,
+    homeAreaId: profile.data.area_id,
+    homeAreaName: areas.data.find((a) => a.id === profile.data.area_id)?.name ?? null,
     areas: areas.data,
     areaId,
     counts: {
