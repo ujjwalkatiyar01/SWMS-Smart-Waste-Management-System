@@ -4,12 +4,12 @@
 // staff ID from the organisation's staff list, which the database checks before the account exists (0800).
 
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { BadgeCheck, Building2, HardHat, IdCard, Mail, MapPin, Phone, ShieldCheck, Trash2, Truck, UserRound } from "lucide-react";
 import { signUp } from "../actions";
 import { PASSWORD_MIN, type AccountType, type SignUpOptions } from "../schema";
 import { ChoiceCards } from "./ChoiceCards";
-import { FormAlert, PasswordField, SelectField, TextField } from "./fields";
+import { FormAlert, PasswordField, SelectField, SelectPromptField, TextField } from "./fields";
 import { SubmitButton } from "./SubmitButton";
 import { useAuthForm } from "./useAuthForm";
 
@@ -29,7 +29,19 @@ export function SignUpForm({ options }: { options: SignUpOptions }) {
   const [workerType, setWorkerType] = useState<"collector" | "driver" | "">("");
   const staff = accountType !== "resident";
   const [organizationId, setOrganizationId] = useState(options.organizations.length === 1 ? options.organizations[0].id : "");
+  const organizationSelect = useRef<HTMLSelectElement>(null);
   const areas = options.areas.filter((a) => a.organizationId === organizationId);
+
+  function chooseOrganizationFirst() {
+    const select = organizationSelect.current;
+    if (!select) return;
+    select.focus();
+    try {
+      select.showPicker();
+    } catch {
+      // Focus still takes the user to Organisation if the browser cannot open its native picker.
+    }
+  }
 
   const { pending, errors, message, formProps } = useAuthForm((data) =>
     signUp({
@@ -96,6 +108,7 @@ export function SignUpForm({ options }: { options: SignUpOptions }) {
             label="Organisation"
             icon={Building2}
             required
+            ref={organizationSelect}
             value={organizationId}
             onChange={(e) => setOrganizationId(e.target.value)}
             error={errors.organizationId}
@@ -109,25 +122,35 @@ export function SignUpForm({ options }: { options: SignUpOptions }) {
               </option>
             ))}
           </SelectField>
-          {accountType !== "admin" && <SelectField
-            key={organizationId}
-            id="areaId"
-            label={staff ? "Work area (block)" : "Home area"}
-            icon={MapPin}
-            required
-            defaultValue=""
-            disabled={!organizationId}
-            error={errors.areaId}
-          >
-            <option value="" disabled>
-              Choose…
-            </option>
-            {areas.map((a) => (
-              <option key={a.id} value={a.id}>
-                {a.name}
+          {accountType !== "admin" && (organizationId ? (
+            <SelectField
+              key={organizationId}
+              id="areaId"
+              label={staff ? "Work area (block)" : "Home area"}
+              icon={MapPin}
+              required
+              defaultValue=""
+              error={errors.areaId}
+            >
+              <option value="" disabled>
+                Choose…
               </option>
-            ))}
-          </SelectField>}
+              {areas.map((a) => (
+                <option key={a.id} value={a.id}>
+                  {a.name}
+                </option>
+              ))}
+            </SelectField>
+          ) : (
+            <SelectPromptField
+              id="areaId"
+              label={staff ? "Work area (block)" : "Home area"}
+              icon={MapPin}
+              hint="Choose an organisation to see its areas."
+              error={errors.areaId}
+              onClick={chooseOrganizationFirst}
+            />
+          ))}
         </div>
         {staff && (
           <TextField

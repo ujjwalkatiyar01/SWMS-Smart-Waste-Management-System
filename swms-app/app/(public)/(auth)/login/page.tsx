@@ -5,5 +5,5 @@ export const metadata: Metadata = { title: "Log in — SWMS" };
 
 export default async function LoginPage({ searchParams }: PageProps<"/login">) {
   const { reason, as } = await searchParams;
-  return <LoginForm inactive={reason === "inactive"} audience={as === "staff" ? "staff" : "resident"} />;
+  return <LoginForm inactive={reason === "inactive"} audience={as === "admin" ? "admin" : as === "staff" ? "staff" : "resident"} />;
 }
