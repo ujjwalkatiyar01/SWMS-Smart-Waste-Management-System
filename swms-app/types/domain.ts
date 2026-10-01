@@ -2,6 +2,9 @@
 
 export type Role = "resident" | "worker" | "admin" | "supervisor" | "higher_authority";
 
+/** Kind of work for the worker role (migration 0800): a driver runs vehicle trips. */
+export type WorkerType = "collector" | "driver";
+
 export type ReportStatus =
   | "submitted"
   | "assigned"
