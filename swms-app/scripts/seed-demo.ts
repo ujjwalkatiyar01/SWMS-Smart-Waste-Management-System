@@ -4,7 +4,7 @@
 //   npm run seed:demo -- --reset  FIRST delete every case, pickup and related row of the two demo
 //                                 organisations (including test data), then add the scenario
 // Scope: only the organisation ids below. Users, places and settings are never changed, except the
-// leaderboard choice of two sample residents.
+// leaderboard choice of two sample residents and the staff ID / worker type of the sample staff.
 
 import { createHash } from "node:crypto";
 import { join } from "node:path";
@@ -65,6 +65,7 @@ async function reset() {
   const orgIds = ORGS.map((o) => o.id);
   // Children first; every table is filtered to the demo organisations only.
   for (const table of [
+    "trip_points", "trip_events", "vehicle_trips", "worker_duties", "worker_checkins",
     "reward_events", "report_followers", "report_events", "notifications", "reports",
     "pickup_events", "pickup_requests", "prevention_reviews", "location_risk",
   ] as const) {
@@ -75,6 +76,7 @@ async function reset() {
   for (const org of ORGS) {
     await removeFolder(`${org.id}/reports`);
     await removeFolder(`${org.id}/pickups`);
+    await removeFolder(`${org.id}/duties`);
   }
   console.log("cleared  stored photos");
 }
@@ -282,6 +284,50 @@ async function main() {
     }
     // Two sample residents join the area leaderboard (their own choice in a real organisation).
     must(await db.from("users").update({ show_on_leaderboard: true }).in("id", [person("r1"), person("r2")]).select("id"), "leaderboard opt-in");
+
+    // ---- staff list (0800): sample staff are already verified; the "new" entries are free for a sign-up demo ----
+    const prefix = org.key === "A" ? "CWA" : "GRS";
+    const staff: { key: string; role: "admin" | "worker"; type: "driver" | "collector" | null; who?: Who; email?: string }[] = [
+      { key: "ADM-001", role: "admin", type: null, who: "admin" },
+      { key: "DRV-001", role: "worker", type: "driver", who: "w1" },
+      { key: "COL-001", role: "worker", type: "collector", who: "w2" },
+      { key: "ADM-002", role: "admin", type: null, email: `newadmin@${org.domain}` },
+      { key: "DRV-002", role: "worker", type: "driver", email: `newdriver@${org.domain}` },
+      { key: "COL-002", role: "worker", type: "collector", email: `newcollector@${org.domain}` },
+    ];
+    for (const s of staff) {
+      const staffId = `${prefix}-${s.key}`;
+      const user = s.who ? must(await db.from("users").select("id, email").eq("id", person(s.who)).single(), "staff user") : null;
+      // A free entry stays free when the scenario runs again, even if it was used for a sign-up demo.
+      const { data: existing } = await db.from("staff_roster").select("claimed_by").eq("id", id(`${org.key}-staff-${s.key}`)).maybeSingle();
+      must(await db.from("staff_roster").upsert({
+        id: id(`${org.key}-staff-${s.key}`), org_id: org.id, staff_id: staffId, email: user?.email ?? s.email!, role: s.role, worker_type: s.type,
+        claimed_by: user?.id ?? existing?.claimed_by ?? null, claimed_at: user || existing?.claimed_by ? ago(24) : null,
+      }, { onConflict: "id" }).select("id"), "staff list");
+      if (user) must(await db.from("users").update({ staff_id: staffId, worker_type: s.type }).eq("id", user.id).select("id"), "staff profile");
+    }
+
+    // ---- duties (1100): the admin's plan for the two sample workers; one finished yesterday with a photo ----
+    const today = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Kolkata" }).format(new Date());
+    const dayOf = (offset: number) => new Date(Date.parse(`${today}T12:00:00Z`) + offset * 24 * H).toISOString().slice(0, 10);
+    const placeIn = (i: number) => places[i % places.length];
+    const duties = [
+      { key: "w1-yesterday", who: "w1" as Who, place: placeIn(0), date: -1, start: "07:00", end: "10:00", task: "Empty the market bins and load the e-rickshaw", done: true },
+      { key: "w1-today", who: "w1" as Who, place: placeIn(0), date: 0, start: "07:00", end: "11:00", task: "Collect from the market bins, then take the load to the disposal site" },
+      { key: "w2-today", who: "w2" as Who, place: placeIn(1), date: 0, start: "08:00", end: "12:00", task: "Clear the dumped waste and sweep the lane" },
+      { key: "w2-tomorrow", who: "w2" as Who, place: placeIn(2), date: 1, start: "08:00", end: "12:00", task: "Clean around the bins and check segregation" },
+    ];
+    for (const d of duties) {
+      const dutyId = id(`${org.key}-duty-${d.key}`);
+      const photo = d.done ? `${org.id}/duties/${dutyId}/after.jpg` : null;
+      if (photo) await upload(photo, "after-swept-road.jpg");
+      must(await db.from("worker_duties").upsert({
+        id: dutyId, org_id: org.id, worker_id: person(d.who), area_id: d.place.area_id, location_id: d.place.id,
+        duty_date: dayOf(d.date), start_time: d.start, end_time: d.end, task: d.task, created_by: person("admin"),
+        status: d.done ? "done" : "scheduled", started_at: d.done ? ago(30) : null, done_at: d.done ? ago(27) : null,
+        photo_url: photo, done_note: d.done ? "6 bags collected, area swept" : null,
+      }, { onConflict: "id" }).select("id"), "duty");
+    }
 
     // ---- risk scores for tomorrow (prediction from demo data, not validated) ----
     for (const [i, p] of allPlaces.entries()) {
