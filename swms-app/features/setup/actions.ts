@@ -221,15 +221,17 @@ const staffSchema = z.object({
   name: z.string().trim().min(2).max(80),
   email: z.email().trim().toLowerCase().max(254),
   role: z.enum(["worker", "supervisor"]),
+  workerType: z.enum(["collector", "driver"]).nullable(),
   areaId: z.uuid().nullable(),
-});
+}).refine((v) => v.role !== "worker" || v.workerType !== null);
 
 // Admin invites a worker or supervisor by email (03 F2.3). The sign-up trigger creates the profile as a
 // resident in the admin's organisation; the admin client then sets the staff role (02-BACKEND §3, use 4).
 export async function addStaff(form: FormData): Promise<SetupResult> {
   const ctx = await context(); if (!ctx) return denied;
-  const parsed = staffSchema.safeParse({ name: form.get("name"), email: form.get("email"), role: form.get("role"), areaId: form.get("areaId") || null });
-  if (!parsed.success) return { ok: false, message: "Enter a name, a valid email and a role." };
+  const parsed = staffSchema.safeParse({ name: form.get("name"), email: form.get("email"), role: form.get("role"),
+    workerType: form.get("role") === "worker" ? form.get("workerType") || null : null, areaId: form.get("areaId") || null });
+  if (!parsed.success) return { ok: false, message: "Enter a name, a valid email, a role and, for a worker, the type of work." };
   const v = parsed.data;
   if (v.areaId) {
     const { data: area } = await ctx.db.from("areas").select("id").eq("id", v.areaId).eq("active", true).maybeSingle();
@@ -247,7 +249,7 @@ export async function addStaff(form: FormData): Promise<SetupResult> {
     if (error?.status === 429) return { ok: false, message: "Too many invites. Please wait a few minutes and try again." };
     return { ok: false, message: "Could not send the invite email. Check the address and try again." };
   }
-  const { error: roleError } = await admin.from("users").update({ role: v.role }).eq("id", data.user.id).eq("org_id", ctx.me.orgId);
+  const { error: roleError } = await admin.from("users").update({ role: v.role, worker_type: v.workerType }).eq("id", data.user.id).eq("org_id", ctx.me.orgId);
   if (roleError) {
     console.error("addStaff role failed", { userId: ctx.me.id, orgId: ctx.me.orgId, code: roleError.code });
     return { ok: false, message: "The invite was sent, but the role could not be set. Set it again from the list." };
@@ -267,4 +269,43 @@ export async function setStaffActive(form: FormData): Promise<SetupResult> {
   }
   revalidatePath("/admin");
   return done(activate ? "Person reactivated." : "Person deactivated. Their open work was returned to you.");
+}
+
+const staffIdSchema = z.object({
+  staffId: z.string().trim().regex(/^[A-Za-z0-9-]{3,40}$/),
+  email: z.email().trim().toLowerCase().max(254),
+  role: z.enum(["worker", "admin"]),
+  workerType: z.enum(["collector", "driver"]).nullable(),
+}).refine((v) => v.role !== "worker" || v.workerType !== null);
+
+// Staff list for verified sign-up (0800): only a listed staff ID + email can open a worker or admin account.
+export async function addStaffId(form: FormData): Promise<SetupResult> {
+  const ctx = await context(); if (!ctx) return denied;
+  const parsed = staffIdSchema.safeParse({ staffId: form.get("staffId"), email: form.get("email"), role: form.get("role"),
+    workerType: form.get("role") === "worker" ? form.get("workerType") || null : null });
+  if (!parsed.success) return { ok: false, message: "Enter a staff ID (letters, numbers, dashes), a valid email, a role and, for a worker, the type of work." };
+  const v = parsed.data;
+  const { error } = await ctx.db.rpc("add_staff_id", { p_staff_id: v.staffId, p_email: v.email, p_role: v.role, p_worker_type: v.workerType ?? undefined });
+  if (error) {
+    if (error.message === "Staff ID or email already listed") return { ok: false, message: "This staff ID or email is already on the list." };
+    console.error("addStaffId failed", { userId: ctx.me.id, orgId: ctx.me.orgId, code: error.code });
+    return failed;
+  }
+  return done(`${v.staffId.toUpperCase()} added. That person can now sign up as ${v.role === "admin" ? "an administrator" : `a ${v.workerType === "driver" ? "driver" : "waste collector"}`}.`);
+}
+
+export async function removeStaffId(form: FormData): Promise<SetupResult> {
+  const ctx = await context(); if (!ctx) return denied;
+  const id = z.uuid().safeParse(form.get("id")); if (!id.success) return failed;
+  const { error } = await ctx.db.rpc("remove_staff_id", { p_id: id.data });
+  return error ? { ok: false, message: "Only unused staff IDs can be removed." } : done("Staff ID removed.");
+}
+
+// Admin moves a worker to another assigned work area (1100); duties are usually planned in this area.
+export async function setWorkerArea(form: FormData): Promise<SetupResult> {
+  const ctx = await context(); if (!ctx) return denied;
+  const worker = z.uuid().safeParse(form.get("id")); const area = z.uuid().safeParse(form.get("areaId"));
+  if (!worker.success || !area.success) return { ok: false, message: "Choose an area." };
+  const { error } = await ctx.db.rpc("set_worker_area", { p_worker: worker.data, p_area: area.data });
+  return error ? failed : done("Work area updated.");
 }
