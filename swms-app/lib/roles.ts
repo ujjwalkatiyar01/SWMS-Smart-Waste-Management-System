@@ -1,7 +1,7 @@
 // Role → home screen, display label, and which roles may open each app area (03 §2, §7; 04-AUTH §2).
 // This only routes people to the right screen; the database rules are the real gate.
 
-import type { Role } from "@/types/domain";
+import type { Role, WorkerType } from "@/types/domain";
 
 export const ROLE_HOME: Record<Role, string> = {
   resident: "/my",
@@ -18,6 +18,12 @@ export const ROLE_LABEL: Record<Role, string> = {
   supervisor: "Supervisor",
   higher_authority: "Higher authority",
 };
+
+/** Header label: a worker with a known type shows that type instead of "Worker / Driver". */
+export function roleLabel(role: Role, workerType: WorkerType | null) {
+  if (role === "worker" && workerType) return workerType === "driver" ? "Driver" : "Waste collector";
+  return ROLE_LABEL[role];
+}
 
 const ALL_ROLES = Object.keys(ROLE_HOME) as Role[];
 

@@ -4,13 +4,15 @@ import "server-only";
 import { cache } from "react";
 import { createClient } from "@/lib/supabase/server";
 import { isRole } from "@/lib/roles";
-import type { Role } from "@/types/domain";
+import type { Role, WorkerType } from "@/types/domain";
 
 export interface CurrentUser {
   id: string;
   orgId: string;
   name: string;
   role: Role;
+  /** Only for workers: collector or driver (0800); null for workers added before worker types existed. */
+  workerType: WorkerType | null;
 }
 
 /** Null when logged out or deactivated (04-AUTH §3 checks 1–2). Cached for one request. */
@@ -20,9 +22,10 @@ export const getCurrentUser = cache(async (): Promise<CurrentUser | null> => {
   const userId = claims?.claims.sub;
   if (!userId) return null;
 
-  const { data } = await supabase.from("users").select("id, org_id, name, role, active").eq("id", userId).maybeSingle();
+  const { data } = await supabase.from("users").select("id, org_id, name, role, active, worker_type").eq("id", userId).maybeSingle();
   if (!data || !data.active || !isRole(data.role)) return null;
-  return { id: data.id, orgId: data.org_id, name: data.name, role: data.role };
+  const workerType = data.worker_type === "collector" || data.worker_type === "driver" ? data.worker_type : null;
+  return { id: data.id, orgId: data.org_id, name: data.name, role: data.role, workerType };
 });
 
 export function firstName(name: string) {
