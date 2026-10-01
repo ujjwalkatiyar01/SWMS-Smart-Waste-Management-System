@@ -80,3 +80,12 @@ npm run test:unit        # Vitest
 npm run test:schema      # database rules offline (PGlite)
 npm run test:e2e         # Playwright, needs the app running and the sample logins
 ```
+
+### Update 🆕 (2026-10-01): verified staff sign-up and live vehicles
+
+- Sign-up asks "Who are you?": Resident, Worker (waste collector or driver) or Administrator. Staff need a staff ID + work email from **Setup → Staff IDs**. Free demo IDs after `npm run seed:demo`: `CWA-ADM-002`, `CWA-DRV-002`, `CWA-COL-002` with `newadmin@`, `newdriver@`, `newcollector@citywarda.demo` (and `GRS-…` with `@greenresidency.demo`).
+- Drivers start a trip on `/worker` by scanning the vehicle QR (print it from Setup → QR codes) or typing its code; the phone shares its GPS while the page stays open. Residents (`/my`), workers and admins (`/admin/map`) see running vehicles.
+
+### SWMS bot 🆕 (2026-10-01)
+
+The animated bin opens a chat from the public home page (right side) and signed-in app pages (left side). Public help is grounded in user-facing workflow guidance. Signed-in residents can ask about their own recent reports and pickups; workers can ask about assigned ones. The bot reads through their session and cannot change records. Add the existing server-only `GEMINI_API_KEY` from `.env.example` to `.env.local` for model-written replies; without it, documented help and status summaries still work. `20261001001200_bot_runs.sql` enables quota-reserved model calls after it is applied. No key is currently configured locally, and live Gemini answers have not been verified.
