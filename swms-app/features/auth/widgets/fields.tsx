@@ -100,11 +100,12 @@ export function SelectField({
   icon,
   hint,
   error,
+  optional,
   children,
   ...select
 }: ComponentProps<"select"> & FieldProps & { id: string }) {
   return (
-    <FieldShell id={id} label={label} icon={icon} hint={hint} error={error}>
+    <FieldShell id={id} label={label} icon={icon} hint={hint} error={error} optional={optional}>
       <select
         id={id}
         name={id}
