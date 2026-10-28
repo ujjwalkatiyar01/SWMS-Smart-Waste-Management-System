@@ -10,7 +10,7 @@
 
 **Website:** **https://swms-smart-waste.vercel.app** 
 
-Two sample organisations are set up with staff accounts so you can see how the app works from each side. Everything in them is **sample data** and may be reset at any time.
+Two sample organisations are set up with staff accounts so you can see how the app works from each side. Everything in them is **sample data** and may be reset at any time. 
 
 ### Staff demo accounts
 
