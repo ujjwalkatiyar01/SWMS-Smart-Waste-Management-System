@@ -4,7 +4,7 @@
 |---|---|
 | **Version** | v1 — 2026-09-30 |
 | **Status** | **Final — stack approved by the team (2026-09-30).** Split from [../04-TECH-STACK.md](../04-TECH-STACK.md) (which stays the decision record: decisions D1–D9, alternatives, sources). |
-| **Evidence labels** | **[Doc]** = checked in official documentation (sources in 04 §12) · **[Rec]** = our recommendation · **[Verify]** = confirm during setup · **(demo)** = sample value · 🆕 = named for the first time while splitting (review list in §5) |
+| **Evidence labels** | **[Doc]** = checked in official documentation (sources in 04 §12) · **[Rec]** = our recommendation · **[Verify]** = confirm during setup · **(demo)** = sample value · 🆕 = named for the first time while splitting (review list in §5) | 
 
 ---
 
