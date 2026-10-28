@@ -17,7 +17,7 @@
 
 ---
 
-## 1. Features at a glance
+## 1. Features at a glance 
 
 | # | Feature | Type | Priority [Rec] | Uses an AI model? |
 |---|---|---|---|---|
