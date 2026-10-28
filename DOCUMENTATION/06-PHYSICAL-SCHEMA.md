@@ -21,7 +21,7 @@
 | **Writes to cases only through functions** | `reports`, `report_events`, `pickup_requests`, `trip_events`, `reward_events` and the flag tables have **no insert/update policies** for users. Every change goes through a status-change function that checks role, organisation, ownership and the allowed transition, writes the timeline event and notifications, all in one transaction. [Rec] |
 | Setup tables | `areas`, `locations`, `vehicles`, `collection_schedules`, `vehicle_trips`, `trip_stops`, `prevention_reviews` and `organizations` settings are edited directly by admins, protected by access rules. |
 | Status values | `text` + `check` constraints (easier to change during the build than Postgres enum types). [Rec] |
-| Time | `timestamptz` (stored in UTC). "Today", slots and schedule windows are compared in the organisation's `timezone`. |
+| Time | `timestamptz` (stored in UTC). "Today", slots and schedule windows are compared in the organisation's `timezone`. | 
 | Ids | `uuid` with `gen_random_uuid()`. `users.id` = the Supabase Auth user id. |
 | Functions | `security definer` + `set search_path = ''` + fully qualified names, so a function cannot be tricked into using another table. [Rec] Helper and job functions live in a `private` schema that the API does not expose. [Rec] |
 | Performance | Access rules call `(select auth.uid())` and helper functions inside `select`, so Postgres evaluates them once per query. [Doc] Columns used in rules are indexed (§4). |
