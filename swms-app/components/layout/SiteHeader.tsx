@@ -42,12 +42,12 @@ export function SiteHeader() {
       >
         Skip to main content
       </a>
-      <div className="mx-auto flex h-18 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:h-20 lg:px-8">
+      <div className="mx-auto flex h-18 max-w-7xl items-center gap-4 pl-2 pr-4 sm:pl-4 sm:pr-6 lg:h-20 lg:pl-2 lg:pr-8">
         <div className="flex items-center gap-3">
           <Logo preload />
         </div>
 
-        <nav aria-label="Main" className="hidden lg:block">
+        <nav aria-label="Main" className="ml-auto hidden lg:block lg:mr-8">
           <ul className="flex items-center gap-1">
             {NAV.map((item) => (
               <li key={item.href}>
@@ -62,7 +62,7 @@ export function SiteHeader() {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <Link
             href="/login"
             className="hidden h-11 items-center gap-2 rounded-full px-4 text-ui font-semibold text-leaf-900 transition-colors hover:bg-leaf-100 sm:inline-flex"

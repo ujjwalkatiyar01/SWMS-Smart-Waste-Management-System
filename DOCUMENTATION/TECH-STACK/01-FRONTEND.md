@@ -1,5 +1,11 @@
 # 1 · Frontend Tech Stack
 
+### Cinematic startup intro 🆕 — user request, 2026-10-28
+
+`features/intro` owns a six-second, once-per-tab-session presentation overlay in the root layout. `SWMSIntro` follows Earth (0–1.4 s), S (1.4 s), W (2 s), M (2.6 s), final S/bin (3.2 s), complete logo (3.8 s), tagline (4.7 s), then dissolves during 5.55–6 s. Reuse the owner's second supplied image unchanged for the final SWMS artwork; do not show the storyboard grid. Three.js is explicitly requested for the rotating textured Earth; lazy-load its renderer, cap pixel density, release GPU resources, and keep a lightweight fallback. Logo extrusion, skyline, arrow, bin and floor reflection are photographic layers from that image, not separate 3D models.
+
+The gate never routes or reads auth/data: the existing proxy and layouts choose the screen behind it. Keep that screen mounted, inert only while playing, with accessible Skip Intro/Escape, focus restoration, a six-second deadline independent of renderer/assets, reduced-motion bypass (including changes during playback), safe handling of blocked storage, and no replay on internal navigation. No server actions, schema or database changes are required. Verify timing, asset failure, WebGL failure, storage failure, skip, no-JavaScript access, mobile and route continuity.
+
 | | |
 |---|---|
 | **Part of** | [00-FULL-TECH-STACK.md](00-FULL-TECH-STACK.md) |

@@ -1,5 +1,9 @@
 # Product Requirements Document (PRD) — Waste Management System
 
+### Cinematic startup presentation 🆕 — explicit owner request, 2026-10-28
+
+Play a six-second SWMS introduction once per browser-tab session, following the supplied eight-stage Earth → S → W → M → S → complete logo → tagline storyboard. Use the owner's second image for the final branding, including the exact phrase SMART WASTE MANAGEMENT SYSTEM and green WASTE. Provide Skip Intro/Escape, reduced-motion bypass, responsive framing and a guaranteed completion deadline. Dissolve into whichever existing route the authentication flow selected; do not replace the homepage/dashboard, perform auth work, or replay during internal navigation. When original 3D logo meshes are unavailable, layered artwork is permitted and its simulated effects must be disclosed. Technical contract: `TECH-STACK/01-FRONTEND.md` startup-intro section.
+
 | | |
 |---|---|
 | **Version** | v4 — 2026-09-30: synced with [03-FULL-APP-FLOW.md](03-FULL-APP-FLOW.md) v3.1 (earlier v3 content kept) |

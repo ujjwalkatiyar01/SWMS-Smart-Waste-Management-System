@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Instrument_Serif, Plus_Jakarta_Sans } from "next/font/google";
 import { SwmsBot } from "@/features/bot";
+import { IntroGate } from "@/features/intro";
 import "./globals.css";
 
 const sans = Plus_Jakarta_Sans({
@@ -32,7 +33,9 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${sans.variable} ${serif.variable} h-full antialiased`}>
-      <body className="flex min-h-full flex-col" suppressHydrationWarning>{children}<SwmsBot /></body>
+      <body className="flex min-h-full flex-col" suppressHydrationWarning>
+        <IntroGate>{children}<SwmsBot /></IntroGate>
+      </body>
     </html>
   );
 }

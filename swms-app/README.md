@@ -1,5 +1,15 @@
 # SWMS app (Next.js)
 
+### Cinematic intro — 2026-10-28
+
+The browser uses the lossless `swms-cinematic.webp` derivative (about 1.24 MB); its decoded RGB pixels match the retained source PNG exactly.
+
+The persistent root `IntroGate` presents `features/intro/SWMSIntro.tsx` once per tab session. The screen behind stays mounted and existing authentication/role routing stays in control. Six-second timeline: Earth 0–1.4 s; letters S/W/M/S at 1.4/2/2.6/3.2 s; assembled logo at 3.8 s; tagline at 4.7 s; dissolve to the app at 5.55–6 s. Skip Intro and Escape end immediately; reduced motion bypasses the overlay. A separate gate deadline prevents failed assets/WebGL from blocking the app. Storage failure falls back to the root component's lifetime. No-JavaScript visitors keep access to the server-rendered page.
+
+`earthScene.ts` lazy-loads Three.js for a real textured sphere rotating about its vertical axis; pixel density is capped at 1.5 and geometry/materials/textures/renderer are disposed after the Earth segment. The remaining visual depth, skyline, bin, arrow, tagline and floor reflection come from CSS-masked regions of the owner's exact second image (`public/brand/intro/swms-cinematic.png`), rather than independently modeled 3D letters. CSS leaves and orbital trails are simulated. Asset provenance is in `public/brand/intro/CREDITS.md`. There are no external asset requests during playback, new auth calls, database changes, video player, or additional application routes. Dependencies added: `three` and development-only `@types/three`.
+
+Timing regression checks: `npx vitest run tests/unit/intro-timeline.test.ts`. To replay locally, remove `swms_intro_played` from this origin's sessionStorage and reload. The supplied original header/logo asset is retained.
+
 The web application for the Smart Waste Management System. Project overview, features and documentation: see the [main README](../README.md) and [DOCUMENTATION/](../DOCUMENTATION/).
 
 ## Run locally
