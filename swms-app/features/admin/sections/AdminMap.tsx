@@ -7,6 +7,7 @@ import { EmptyState } from "@/features/staff";
 import type { getMapData } from "../server";
 import { PIN } from "../map-colors";
 import { MapViewLoader } from "../widgets/MapViewLoader";
+import { UttarPradeshMapLoader } from "../widgets/UttarPradeshMapLoader";
 
 type MapData = Awaited<ReturnType<typeof getMapData>>;
 
@@ -63,6 +64,14 @@ export function AdminMap({ data }: { data: MapData }) {
         ) : (
           <EmptyState title="No places with a map position yet" hint="Add places with a position under Setup." />
         )}
+      </section>
+      <section aria-labelledby="up-map-title" className="flex flex-col gap-3">
+        <h2 id="up-map-title" className="text-xl font-bold text-leaf-950">Uttar Pradesh map</h2>
+        <p className="text-sm text-muted-foreground">Explore Uttar Pradesh in this separate regional overview. This map does not show waste-service coverage or statewide report data.</p>
+        <UttarPradeshMapLoader />
+        <p className="text-sm text-muted-foreground">
+          If map tiles do not load, <a href="https://www.openstreetmap.org/#map=7/27.15/80.85" target="_blank" rel="noopener noreferrer" className="font-semibold text-leaf-800 underline">open the Uttar Pradesh view in OpenStreetMap</a>.
+        </p>
       </section>
     </div>
   );

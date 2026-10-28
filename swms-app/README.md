@@ -105,3 +105,7 @@ The launcher is a transparent animated mascot fixed at the bottom, with a small 
 ### Demo QR walkthrough 🆕 (2026-10-01)
 
 Admin Setup → QR codes includes a read-only demo area. Upload a PNG, JPEG or WebP QR image to preview the matching worker, waste collector, driver, bin/spot, disposal-site or vehicle process. The image is decoded in the browser and not stored. The page also supplies three downloadable role-demo QRs; scanning one with a phone opens the public `/demo/qr` walkthrough. Unknown and other-organisation codes are rejected. Demo scans never sign in a user or change app data; the printed operational QRs keep their existing checks. Disposal-site verification is documented but not yet implemented as an app action.
+
+### Uttar Pradesh overview — 2026-10-28
+
+Open **Admin → Map** (`/admin/map`) to find a separate **Uttar Pradesh map** below the existing map and Places list. It is a geographic overview with pan/zoom and Reset UP view, not statewide service or report data. Existing operational maps remain unchanged. Uses the installed Leaflet/OpenStreetMap stack without another key or package; tiles need internet.
