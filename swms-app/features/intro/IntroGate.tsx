@@ -1,11 +1,10 @@
 "use client";
 
 import { startTransition, useCallback, useEffect, useRef, useState } from "react";
-import { SWMSIntro } from "./SWMSIntro";
-import { INTRO_DURATION_MS } from "./timeline";
+import { StoryboardIntro } from "./StoryboardIntro";
 import styles from "./intro.module.css";
 
-const SESSION_KEY = "swms_intro_played";
+const INTRO_DEADLINE_MS = 8500;
 let attemptedInThisDocument = false;
 
 type Playback = { status: "pending" | "done" } | { status: "playing"; startedAt: number };
@@ -22,14 +21,7 @@ export function IntroGate({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (!decision.current) {
-      let seen = attemptedInThisDocument;
-      try {
-        seen ||= sessionStorage.getItem(SESSION_KEY) === "1";
-        // Reserve the attempt before rendering so errors or reloads cannot trap users in a replay.
-        sessionStorage.setItem(SESSION_KEY, "1");
-      } catch {
-        // Storage is optional; the root gate also prevents route-change replays.
-      }
+      const seen = attemptedInThisDocument;
       attemptedInThisDocument = true;
       decision.current = { play: !seen && !motion.matches, startedAt: performance.now() };
     }
@@ -40,10 +32,10 @@ export function IntroGate({ children }: { children: React.ReactNode }) {
 
     const { startedAt } = decision.current;
     startTransition(() => setPlayback({ status: "playing", startedAt }));
-    const deadline = window.setTimeout(complete, Math.max(0, INTRO_DURATION_MS - (performance.now() - startedAt)));
+    const deadline = window.setTimeout(complete, Math.max(0, INTRO_DEADLINE_MS - (performance.now() - startedAt)));
     const onMotionChange = () => { if (motion.matches) complete(); };
     const onVisible = () => {
-      if (performance.now() - startedAt >= INTRO_DURATION_MS) complete();
+      if (performance.now() - startedAt >= INTRO_DEADLINE_MS) complete();
     };
     motion.addEventListener("change", onMotionChange);
     document.addEventListener("visibilitychange", onVisible);
@@ -76,7 +68,7 @@ export function IntroGate({ children }: { children: React.ReactNode }) {
         {children}
       </div>
       {playback.status === "pending" && <div className={`${styles.cover} swms-intro-pending`} aria-hidden />}
-      {playback.status === "playing" && <SWMSIntro startedAt={playback.startedAt} onComplete={complete} />}
+      {playback.status === "playing" && <StoryboardIntro onComplete={complete} />}
       <noscript><style>{`.swms-intro-pending{display:none!important}`}</style></noscript>
     </>
   );

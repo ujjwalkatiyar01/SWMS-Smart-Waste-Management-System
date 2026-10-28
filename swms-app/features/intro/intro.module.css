@@ -35,3 +35,6 @@
 @keyframes fallbackRotate { from { background-position: 45% center; } to { background-position: 100% center; } }
 @media (max-width: 600px) { .artwork { width: 99vw; } .skip { top: max(18px, env(safe-area-inset-top)); right: max(18px, env(safe-area-inset-right)); } .leaf:nth-of-type(2n), .particle:nth-of-type(2n) { display: none; } }
 @media (prefers-reduced-motion: reduce) { .cover { display: none; } .cover * { animation: none; transition: none; } }
+
+.introVideo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #000; }
+.videoLeaving { opacity: 0; transition: opacity .35s ease; }

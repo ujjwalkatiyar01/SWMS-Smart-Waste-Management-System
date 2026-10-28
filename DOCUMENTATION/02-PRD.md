@@ -254,3 +254,9 @@ On the admin QR page, an administrator can upload a QR image and see the corresp
 ### Separate Uttar Pradesh map — user request, 2026-10-28
 
 Add a separate Uttar Pradesh geographic overview to the admin map page, preserving the existing operational map, pins, legend and Places list. This is a browsable base map only; no statewide operational data or service coverage is claimed.
+
+### Startup intro revision — 2026-10-28
+The owner requested a silent seven-second sprout → S → SW → SWM → SWMS reveal, followed by “SMART WASTE MANAGEMENT SYSTEM” and “Cleaner Cities • Greener Tomorrow”. This supersedes the earlier Earth/bin visual sequence above while preserving once-per-session playback, skip, reduced-motion and a fallback to the existing app.
+
+### Intro replay update — 2026-10-28
+At the owner's request, play the current intro on each new website document load, including refresh. Do not replay it during client-side navigation. The existing reduced-motion bypass, skip, and failure deadline remain in effect. This supersedes the earlier once-per-session wording.

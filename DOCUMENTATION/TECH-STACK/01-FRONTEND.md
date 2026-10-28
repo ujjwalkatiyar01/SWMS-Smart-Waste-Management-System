@@ -247,3 +247,11 @@ The generated role QR images encode `/demo/qr?demo=worker|collector|driver`, a p
 ### Separate Uttar Pradesh map 🆕 — user request, 2026-10-28
 
 `features/admin/widgets/UttarPradeshMap.tsx` renders an independent Leaflet/OpenStreetMap overview below the existing map and Places list on `/admin/map`. `UttarPradeshMapLoader.tsx` disables server rendering and supplies a loading state. A fixed viewing extent (not a boundary polygon or coverage area), visible attribution, Reset UP view button, accessible heading and fallback OpenStreetMap link keep it independent of operational data. Reuse installed packages and existing tokens; no database, AI, API key or permission changes. Verify both maps, pan/zoom/reset independence, desktop/phone widths, type/lint/build and browser errors.
+
+### Storyboard video intro update 🆕 — user request, 2026-10-28
+The latest request replaces the presentation sequence with a seven-second silent local MP4: sprout, S → SW → SWM → SWMS, full title, then tagline. `StoryboardIntro` plays the H.264 file inline and muted inside the existing root gate, with an 8.5-second failure deadline, skip, Escape, and reduced-motion bypass. The app beneath remains mounted and its routing is unchanged. The scenic lettering is generated image artwork with composited motion, not independently modeled 3D geometry; source is retained in `INTRO-ANIMATION/`. The earlier intro source and assets remain in place.
+
+Formation refinement 🆕: the startup video now uses individually traced, progressive letter reveals rather than moving completed letters into view. The earlier exported video is retained; playback behavior is unchanged.
+
+### Intro replay update 🆕 — 2026-10-28
+The root intro gate now plays on each new document load, including refresh, instead of storing a once-per-tab-session marker. The root component still prevents replay on client-side navigation and retains reduced-motion bypass, skip and the playback deadline. This supersedes earlier session-marker descriptions.

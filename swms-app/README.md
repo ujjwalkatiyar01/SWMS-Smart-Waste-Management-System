@@ -109,3 +109,11 @@ Admin Setup → QR codes includes a read-only demo area. Upload a PNG, JPEG or W
 ### Uttar Pradesh overview — 2026-10-28
 
 Open **Admin → Map** (`/admin/map`) to find a separate **Uttar Pradesh map** below the existing map and Places list. It is a geographic overview with pan/zoom and Reset UP view, not statewide service or report data. Existing operational maps remain unchanged. Uses the installed Leaflet/OpenStreetMap stack without another key or package; tiles need internet.
+
+### Storyboard video intro update — 2026-10-28
+The current intro uses `public/brand/intro/swms-storyboard-intro.mp4` via `features/intro/StoryboardIntro.tsx`. It is silent, seven seconds, and plays once per tab session with skip, reduced-motion bypass, and a deadline fallback. Its scenic letters are composited artwork rather than independently modeled 3D meshes. The rendering source and artwork are in `../INTRO-ANIMATION/`; the previous intro implementation is retained.
+
+The revised formation version uses `swms-formation-v2.mp4`: light traces and a progressive surface reveal build each letter in sequence. The artwork is still composited, not a modeled 3D simulation. The earlier video is retained.
+
+### Intro replay update — 2026-10-28
+The current `swms-formation-v2.mp4` intro plays on every new page load and refresh, rather than once per browser-tab session. It does not replay during client-side navigation. Reduced-motion bypass, Skip and playback-failure fallback remain enabled.

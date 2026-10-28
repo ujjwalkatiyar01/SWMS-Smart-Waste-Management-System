@@ -1045,3 +1045,9 @@ The three generated role demo QR images point to the public, read-only `/demo/qr
 ### Separate Uttar Pradesh map — 2026-10-28
 
 Admin → Map (`/admin/map`) → existing operational map and Places list → separate Uttar Pradesh overview. Pan, zoom and Reset UP view affect only the overview. Existing admin authorization applies. No reads, writes, status transitions or refresh contract changes; this map receives no private data. A text link opens the same regional view in OpenStreetMap if tiles are unavailable.
+
+### Startup intro revision — 2026-10-28
+On a fresh browser-tab session, play the seven-second silent storyboard video and dissolve into the already-selected app route. Skip, Escape, reduced motion, playback failure and a deadline keep the underlying route accessible; internal navigation does not replay it.
+
+### Intro replay update — 2026-10-28
+Play the current intro on each fresh page load or refresh, then reveal the existing route. Client-side navigation does not replay it. Reduced motion and the existing skip and failure fallbacks remain available.
