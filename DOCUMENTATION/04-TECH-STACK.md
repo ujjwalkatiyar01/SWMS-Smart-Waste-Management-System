@@ -7,7 +7,7 @@
 | **Builds on** | [02-PRD.md](02-PRD.md) and [03-FULL-APP-FLOW.md](03-FULL-APP-FLOW.md): §1 architecture, §8 data model, §9 jobs, §10 stack requirements |
 | **Evidence labels** | **[Doc]** = checked in official documentation (sources in §12) · **[Rec]** = our recommendation · **[Verify]** = confirm during setup |
 | **AI update** | v1.1 — 2026-09-30: AI and intelligence features added (🧠); details in [05-AI-SPEC.md](05-AI-SPEC.md) |
-| **Split by part** 🆕 | [TECH-STACK/](TECH-STACK/00-FULL-TECH-STACK.md): full overview + 8 detailed part files (frontend, backend, database, auth, storage & photos, AI, background jobs, DevOps). This file stays the decision record (D1–D9, alternatives, sources). |
+| **Split by part** 🆕 | [TECH-STACK/](TECH-STACK/00-FULL-TECH-STACK.md): full overview + 8 detailed part files (frontend, backend, database, auth, storage & photos, AI, background jobs, DevOps). This file stays the decision record (D1–D9, alternatives, sources). | 
 
 ---
 
