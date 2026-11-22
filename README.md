@@ -2,7 +2,7 @@
 
 **Most waste apps stop at "complaint submitted." SWMS closes the loop.** Every report is pinned to a place, assigned to a worker, and closed only with photo proof and the resident's confirmation. The history of each place shows admins where problems keep coming back, so they can prevent them instead of only reacting.
 
-> **Status:** in development. Design, documentation and database schema are complete; the app's home page is built; the other screens and the backend are being built now. All organisations, people, places and cases in the app are **sample data**.
+> **Status:** working MVP, live on Vercel. All five role areas (resident, worker/driver, admin, supervisor, higher authority), the database with row-level security, the AI photo analyzer, the SWMS assistant and the scheduled escalation jobs are built, with unit, database and end-to-end tests. All organisations, people, places and cases in the app are **sample data**.
 
 ---
 
@@ -143,8 +143,9 @@ flowchart LR
 | **Row Level Security** | Access control | Enforced by the database itself |
 | **Supabase Auth** | Login, sessions, password reset | Built in |
 | **Supabase Storage** | Private photos with time-limited links | Photos of homes and streets stay private |
-| **pg_cron** | 7 scheduled jobs | Runs inside the database |
-| **Gemini API** | Waste category suggestion | Behind a small adapter, so it can be replaced |
+| **pg_cron** | 4 scheduled jobs (overdue, escalation, missed pickups, hotspot risk) | Runs inside the database |
+| **Gemini API** | Waste category suggestion and the SWMS assistant | Behind a small adapter, so it can be replaced |
+| **Vitest + Playwright** | Unit, database and end-to-end tests | Checks access rules and the full case story |
 | **Leaflet + OpenStreetMap** | Maps | Free, no key needed |
 | **Vercel** | Hosting with HTTPS | Phone camera and GPS need HTTPS |
 
@@ -152,17 +153,27 @@ flowchart LR
 
 ## 7. Run it locally
 
-Requirements: **Node.js 20.9 or newer** (24 LTS recommended).
+Requirements: **Node.js 22** (see `swms-app/.nvmrc`) and a Supabase project.
 
 ```bash
 cd swms-app
 npm install
+cp .env.example .env.local   # fill in the Supabase and Gemini keys
+npm run db:push              # apply the database migrations
+npm run seed:users           # create the sample staff logins
+npm run seed:demo            # load the sample organisations and cases
 npm run dev
 ```
 
-Open **http://localhost:3000**. Only the home page exists so far; it needs no keys.
+Open **http://localhost:3000**. Without a Gemini key the app still works: the photo analyzer falls back to manual category choice and the assistant to its built-in help.
 
+### Tests
 
+```bash
+npm run test:unit     # Vitest: analytics, CSV, photo handling
+npm run test:schema   # Vitest: database rules, lifecycle and access (needs the database)
+npm run test:e2e      # Playwright: the full report → fix → confirm story in a browser
+```
 
 ## 8. Repository map
 
@@ -176,6 +187,11 @@ Open **http://localhost:3000**. Only the home page exists so far; it needs no ke
 │   ├── 06-PHYSICAL-SCHEMA.md      full database SQL and test results
 │   └── TECH-STACK/                the stack split into 8 parts (frontend … devops)
 └── swms-app/                      the Next.js application
+    ├── app/                       screens for each role, API routes (AI, bot)
+    ├── features/                  one folder per feature (reports, pickups, escalations …)
+    ├── lib/                       AI adapter, photo handling, validation, auth helpers
+    ├── supabase/migrations/       tables, row-level security, status functions, cron jobs
+    └── tests/                     unit, schema and end-to-end tests
 ```
 
 **Where to start reading:** this README → 03-FULL-APP-FLOW §4.0 (the full workflow diagram) → 02-PRD.
